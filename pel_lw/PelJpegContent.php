@@ -1,0 +1,1 @@
+<?php require_once('PelDataWindow.php'); class PelJpegContent { private $data = null; function __construct(PelDataWindow $data) { $this->data = $data; } function getBytes() { return $this->data->getBytes(); } } ?>
