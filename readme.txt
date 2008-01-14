@@ -33,7 +33,7 @@ Basically because there is no other plug-in which is able to provide access to a
 
 == Usage ==
 
-Using this simple token in your post: `[exzo url=”" title=”title"]image.jpg[/exzo]` while running the plug-in will provide the standard output (title, image and exif). You have some options while using this filter. If you supply an url, the image will be linked to that url (all except the magnifying glass at the upper left, which will always enlarge the picture if possible). If no url is supplied (i.e. `url=""`), the whole image will be linked to the larger image (if available). If there’s no thumbnail file the zoom function will be disabled (you’ll see no loupe) and the whole picture is either linked to the url (if supplied) or static with no interaction.
+Using this simple token in your post: `[exzo url="" title="title"]image.jpg[/exzo]` while running the plug-in will provide the standard output (title, image and exif). You have some options while using this filter. If you supply an url, the image will be linked to that url (all except the magnifying glass at the upper left, which will always enlarge the picture if possible). If no url is supplied (i.e. `url=""`), the whole image will be linked to the larger image (if available). If there's no thumbnail file the zoom function will be disabled (you'll see no loupe) and the whole picture is either linked to the url (if supplied) or static with no interaction.
 
 == Templates ==
 As of v0.b6 you can write your own template for the Title and the Exif section. For example the template for my title looks like this:
@@ -66,7 +66,7 @@ the following tokens are standard EXIF tags. Most are self explanatory - I've st
 * %COLOR_SPACE% - **Uncalibrated**
 * %COMPRESSION% - **Uncompressed**
 * %CONTRAST% - **Normal**
-* %COPYRIGHT% - **© Visual Magic (Photographer)**
+* %COPYRIGHT% - **Visual Magic (Photographer)**
 * %DATETIME% - **2007.01.01 16:26:50.57+01:00**
 * %DATE_TIME_DIGITIZED% - **n.a.**
 * %DATE_TIME_ORIGINAL% - **n.a.**
@@ -169,7 +169,7 @@ Here are some EXIF grabbed from the PS XML inside the Exif aux field. These migh
 
 
 == License ==
-This WordPress plug is released under the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> and is provided with absolutely no warranty (as if?). For support leave a comment and we’ll see what the community has to say.
+This WordPress plug is released under the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> and is provided with absolutely no warranty (as if?). For support leave a comment and we'll see what the community has to say.
 
 
 == Version History ==
