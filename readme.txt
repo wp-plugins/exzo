@@ -166,3 +166,31 @@ Here are some EXIF grabbed from the PS XML inside the Exif aux field. These migh
 * %XResolution% - **3000000/10000**
 * %YResolution% - **3000000/10000**
 * %format% - **image/jpeg**
+
+
+== License ==
+This WordPress plug is released under the <a href="http://www.gnu.org/licenses/gpl.html">GPL</a> and is provided with absolutely no warranty (as if?). For support leave a comment and weÕll see what the community has to say.
+
+
+== Version History ==
+* 13.feb.2007	v0.b6.1	È new option: customisable alignment [Off | Left | Center | Right]
+ > È pepped up the admin panel
+ > È optimised code
+* 12.feb.2007	v0.b6	Major (complete) rewrite
+ > È Admin panel
+ > È User definable templates
+ > È Token based access to Exifs
+ > È "Live preview" in admin panel
+ > È new option: max thumbnail width
+ > È new option: max thumbnail height
+ > È new option: min table width
+ > È new option: Title [Off / On / Force On]
+ > È new option: Exif [Off / On / Force On]
+ > È new option: overlay strings [for linked & static text]
+ > È new option: error strings [no title / empty exif tag]
+* 02.feb.2007	v0.5.4	È Bugfix [Corrected Transitional XHTML Code]
+* 26.jan.2007	v0.5.3	È WordPress 2.1 Compatibility Update [adapted to new table wp_post table]
+* 21.jan.2007	v0.5.2	È Bugfix [bug in _getImagePath squashed]
+* 15.jan.2007	v0.5.1	È Bugfix [incorrect camera maker readout]
+* 14.jan.2007	v0.5	È got rid of Perl <sniff> by using the PEL-PHP-Library
+* 08.jan.2007	v0.4	È first public release
