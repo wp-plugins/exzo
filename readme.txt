@@ -6,7 +6,12 @@ Requires at least: 2.1
 Tested up to: 2.3.2
 Stable tag: 0.6.1
 
+Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).
+
+== Description ==
+
 ExZo is a plugin that displays jpgs, some (or all) of their Exif tags and bundles a zoom functionality. User definable templates and token access to any Exif tag and a life preview of each in the admin panel are core features.
+
 
 == Usage ==
 
