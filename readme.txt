@@ -1,7 +1,6 @@
 === Exif & Zoom ===
 Contributors: tmb
-Donate link: http://blog.vimagic.de/exif-zoom-wordpress-plugin/
-Tags: exif, zoom
+Tags: exif, zoom, formating, lightbox, images, picture, photo, foto,
 Requires at least: 2.1
 Tested up to: 2.3.2
 Stable tag: 0.6.1
