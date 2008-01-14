@@ -31,112 +31,122 @@ Notice the token words **`%tableWidth%`** and **`%title%`**. See the next sectio
 
 == Usable Tokens ==
 
-%title% - will be substituted for the tile of the image
-%tableWidth% - width of the table for title/exif-table container (function of image size, border and minimal table size)
-%tableWidth+/-n% - basic algebraic manipulation of the table width (adding OR substraction n pix from the table width)
-%PERMALINK% - will get substituted by the permalink of the post/page of the picture
-%APERTURE%	  -  	f/6.3
-%ARTIST%	  -  	Thomas M. Bšsel
-%CAM%	  -  	 D200
-%COLOR_SPACE%	  -  	Uncalibrated
-%COMPRESSION%	  -  	Uncompressed
-%CONTRAST%	  -  	Normal
-%COPYRIGHT%	  -  	© Visual Magic (Photographer)
-%DATETIME%	  -  	2007.01.01 16:26:50.57+01:00
-%DATE_TIME_DIGITIZED%	  -  	n.a.
-%DATE_TIME_ORIGINAL%	  -  	n.a.
-%DIGITAL_ZOOM_RATIO%	  -  	Auto white balance
-%EXPOSURE_BIAS_VALUE%	  -  	0.0
-%EXPOSURE_MODE%	  -  	Auto exposure
-%EXPOSURE_PROGRAM%	  -  	Normal program
-%FLASH%	  -  	Flash did not fire.
-%FNUMBER%	  -  	f/6.3
-%FOCAL%	  -  	26 mm
-%FOCAL_LENGTH_IN_35MM_FILM%	  -  	39
-%GAIN_CONTROL%	  -  	Normal
-%IMAGENUMBER%	  -  	7505
-%ISO%	  -  	100
-%LENS%	  -  	17.0-55.0 mm f/2.8
-%LIGHT_SOURCE%	  -  	Unknown
-%MAKE%	  -  	NIKON CORPORATION
-%MAX_APERTURE_VALUE%	  -  	30/10
-%METERING_MODE%	  -  	Pattern
-%MODEL%	  -  	NIKON D200
-%ORIENTATION%	  -  	top - left
-%PHOTOMETRIC_INTERPRETATION%	  -  	RGB
-%PIXEL_X_DIMENSION%	  -  	500
-%PIXEL_Y_DIMENSION%	  -  	281
-%RESOLUTION_UNIT%	  -  	Inch
-%SATURATION%	  -  	High saturation
-%SCENE_CAPTURE_TYPE%	  -  	Standard
-%SCENE_TYPE%	  -  	Directly photographed
-%SENSING_METHOD%	  -  	One-chip color area sensor
-%SHARPNESS%	  -  	Hard
-%SHUTTER%	  -  	1/160 s
-%SHUTTER_SPEED_VALUE%	  -  	7.321928 sec. (APEX: 12)
-%SOFTWARE%	  -  	Adobe Photoshop CS2 Macintosh
-%SUBJECT_DISTANCE_RANGE%	  -  	Unknown
-%WHITE_BALANCE%	  -  	Auto white balance
-%X_RESOLUTION%	  -  	300
-%Y_RESOLUTION%	  -  	300
-%ApertureValue%	  -  	5310704/1000000
-%ColorMode%	  -  	3
-%ColorSpace%	  -  	-1
-%Compression%	  -  	1
-%Contrast%	  -  	0
-%CreateDate%	  -  	2007-01-03T15:49:05+01:00
-%CreatorTool%	  -  	Adobe Photoshop CS2 Macintosh
-%CustomRendered%	  -  	0
-%DateTimeDigitized%	  -  	2007-01-01T16:26:50.57+01:00
-%DateTimeOriginal%	  -  	2007-01-01T16:26:50.57+01:00
-%DigitalZoomRatio%	  -  	1/1
-%ExposureBiasValue%	  -  	0/6
-%ExposureMode%	  -  	0
-%ExposureProgram%	  -  	2
-%ExposureTime%	  -  	1/160
-%FNumber%	  -  	63/10
-%FileSource%	  -  	3
-%Fired%	  -  	False
-%FocalLength%	  -  	260/10
-%FocalLengthIn35mmFilm%	  -  	39
-%Function%	  -  	False
-%GainControl%	  -  	0
-%History%	  -  	n.a.
-%ICCProfile%	  -  	Adobe RGB (1998)
-%ImageLength%	  -  	1925
-%ImageNumber%	  -  	7505
-%ImageWidth%	  -  	3423
-%Lens%	  -  	17.0-55.0 mm f/2.8
-%LensInfo%	  -  	170/10 550/10 28/10 28/10
-%LightSource%	  -  	0
-%Make%	  -  	NIKON CORPORATION
-%MaxApertureValue%	  -  	30/10
-%MetadataDate%	  -  	2007-01-03T15:49:05+01:00
-%MeteringMode%	  -  	5
-%Mode%	  -  	0
-%Model%	  -  	NIKON D200
-%ModifyDate%	  -  	2007-01-03T15:49:05+01:00
-%Orientation%	  -  	1
-%PhotometricInterpretation%	  -  	2
-%PixelXDimension%	  -  	500
-%PixelYDimension%	  -  	281
-%PlanarConfiguration%	  -  	1
-%Rating%	  -  	1
-%RedEyeMode%	  -  	False
-%ResolutionUnit%	  -  	2
-%Return%	  -  	0
-%SamplesPerPixel%	  -  	3
-%Saturation%	  -  	2
-%SceneCaptureType%	  -  	0
-%SceneType%	  -  	1
-%SensingMethod%	  -  	2
-%Sharpness%	  -  	2
-%ShutterSpeedValue%	  -  	7321928/1000000
-%SubjectDistanceRange%	  -  	0
-%WhiteBalance%	  -  	0
-%XResolution%	  -  	3000000/10000
-%YResolution%	  -  	3000000/10000
-%format%	  -  	image/jpeg
+There's quite a few tokens that are theoretically possible.  Some are dependent on the values set in the admin panel, others are basic EXIF and yet others are EXIF written by software like Photoshop.
+
+= admin panel tokens = 
+* %title% - will be substituted for the tile of the image
+* %tableWidth% - width of the table for title/exif-table container (function of image size, border and minimal table size)
+* %tableWidth+/-n% - basic algebraic manipulation of the table width (adding OR substraction n pix from the table width)
+* %PERMALINK% - will get substituted by the permalink of the post/page of the picture
+
+= standard EXIF =
+the following tokens are standard EXIF tags. Most are self explanatory - I've still added the value of each tag from my sample picture.
+
+* %APERTURE% - **f/6.3**
+* %ARTIST% - **Thomas M. B&ouml;sel**
+* %CAM% - **D200**
+* %COLOR_SPACE% - **Uncalibrated**
+* %COMPRESSION% - **Uncompressed**
+* %CONTRAST% - **Normal**
+* %COPYRIGHT% - **© Visual Magic (Photographer)**
+* %DATETIME% - **2007.01.01 16:26:50.57+01:00**
+* %DATE_TIME_DIGITIZED% - **n.a.**
+* %DATE_TIME_ORIGINAL% - **n.a.**
+* %DIGITAL_ZOOM_RATIO% - **Auto white balance**
+* %EXPOSURE_BIAS_VALUE% - **0.0**
+* %EXPOSURE_MODE% - **Auto exposure**
+* %EXPOSURE_PROGRAM% - **Normal program**
+* %FLASH% - **Flash did not fire.**
+* %FNUMBER% - **f/6.3**
+* %FOCAL% - **26 mm**
+* %FOCAL_LENGTH_IN_35MM_FILM% - **39**
+* %GAIN_CONTROL% - **Normal**
+* %IMAGENUMBER% - **7505**
+* %ISO% - **100**
+* %LENS% - **17.0-55.0 mm f/2.8**
+* %LIGHT_SOURCE% - **Unknown**
+* %MAKE% - **NIKON CORPORATION**
+* %MAX_APERTURE_VALUE% - **30/10**
+* %METERING_MODE% - **Pattern**
+* %MODEL% - **NIKON D200**
+* %ORIENTATION% - **top - left**
+* %PHOTOMETRIC_INTERPRETATION% - **RGB**
+* %PIXEL_X_DIMENSION% - **500**
+* %PIXEL_Y_DIMENSION% - **281**
+* %RESOLUTION_UNIT% - **Inch**
+* %SATURATION% - **High saturation**
+* %SCENE_CAPTURE_TYPE% - **Standard**
+* %SCENE_TYPE% - **Directly photographed**
+* %SENSING_METHOD% - **One-chip color area sensor**
+* %SHARPNESS% - **Hard**
+* %SHUTTER% - **1/160 s**
+* %SHUTTER_SPEED_VALUE% - **7.321928 sec. (APEX: 12)**
+* %SOFTWARE% - **Adobe Photoshop CS2 Macintosh**
+* %SUBJECT_DISTANCE_RANGE% - **Unknown**
+* %WHITE_BALANCE% - **Auto white balance**
+* %X_RESOLUTION% - **300**
+* %Y_RESOLUTION% - **300**
+
+
+
+%ApertureValue% - 5310704/1000000
+%ColorMode% - 3
+%ColorSpace% - -1
+%Compression% - 1
+%Contrast% - 0
+%CreateDate% - 2007-01-03T15:49:05+01:00
+%CreatorTool% - Adobe Photoshop CS2 Macintosh
+%CustomRendered% - 0
+%DateTimeDigitized% - 2007-01-01T16:26:50.57+01:00
+%DateTimeOriginal% - 2007-01-01T16:26:50.57+01:00
+%DigitalZoomRatio% - 1/1
+%ExposureBiasValue% - 0/6
+%ExposureMode% - 0
+%ExposureProgram% - 2
+%ExposureTime% - 1/160
+%FNumber% - 63/10
+%FileSource% - 3
+%Fired% - False
+%FocalLength% - 260/10
+%FocalLengthIn35mmFilm% - 39
+%Function% - False
+%GainControl% - 0
+%History% - n.a.
+%ICCProfile% - Adobe RGB (1998)
+%ImageLength% - 1925
+%ImageNumber% - 7505
+%ImageWidth% - 3423
+%Lens% - 17.0-55.0 mm f/2.8
+%LensInfo% - 170/10 550/10 28/10 28/10
+%LightSource% - 0
+%Make% - NIKON CORPORATION
+%MaxApertureValue% - 30/10
+%MetadataDate% - 2007-01-03T15:49:05+01:00
+%MeteringMode% - 5
+%Mode% - 0
+%Model% - NIKON D200
+%ModifyDate% - 2007-01-03T15:49:05+01:00
+%Orientation% - 1
+%PhotometricInterpretation% - 2
+%PixelXDimension% - 500
+%PixelYDimension% - 281
+%PlanarConfiguration% - 1
+%Rating% - 1
+%RedEyeMode% - False
+%ResolutionUnit% - 2
+%Return% - 0
+%SamplesPerPixel% - 3
+%Saturation% - 2
+%SceneCaptureType% - 0
+%SceneType% - 1
+%SensingMethod% - 2
+%Sharpness% - 2
+%ShutterSpeedValue% - 7321928/1000000
+%SubjectDistanceRange% - 0
+%WhiteBalance% - 0
+%XResolution% - 3000000/10000
+%YResolution% - 3000000/10000
+%format% - image/jpeg
 
 == Installation ==
 
@@ -148,7 +158,6 @@ Note: the pictures should have been uploaded with the internal WordPress uploade
 
 
 == Frequently Asked Questions ==
-
 
 = Modifying inline-uploading.php? =
 Modifying the inline-uploading.php is obsolete as of wordpress v2.1. Click here for a short tutorial on what to do now.
