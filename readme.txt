@@ -13,6 +13,25 @@ Displays Images (JPG), the corresponding Exif (if available) and provides zoom f
 ExZo is a plugin that displays jpgs, some (or all) of their Exif tags and bundles a zoom functionality. User definable templates and token access to any Exif tag and a life preview of each in the admin panel are core features.
 
 
+== Installation ==
+
+You will need **PHP5** and **Wordpress2.1** or higher to use this plugin. Otherwise there is nothing more to set up, just download, extract into `/wordpress/wp-content/plugins` and activate. Check the admin panel "Options->ExZo" for further options (for example your email if you like).
+
+Note: the pictures should have been uploaded with the internal WordPress uploader - at least an entry in the `wp_posts` database should exist (needed to find the image file using only the filename).
+
+
+== Frequently Asked Questions ==
+
+= It doesn't work: Parse error*: parse error, unexpected ')', expecting '(' in *[...]/wordpress/wp-content/plugins/exzo/exzo.php* =
+This is most likely due to the fact that your web server is not running on PHP 5, which we need for PEL.
+
+= Why another Exif/Picture/Zoom Plugin? =
+Basically because there is no other plug-in which is able to provide access to all Exif tags (f.e. the image number provided by Nikons D200). If you ask me, most existing plug ins only provide a rudimentary implementation. Apart from that, none of them includes an elegant lightbox-style way of zooming pictures. All in all that was reason enough to write ExZo.
+
+== Screenshots ==
+1. ExZo in action.
+2. Fully configurable in the admin options panel.
+
 == Usage ==
 
 Using this simple token in your post: `[exzo url=”" title=”title"]image.jpg[/exzo]` while running the plug-in will provide the standard output (title, image and exif). You have some options while using this filter. If you supply an url, the image will be linked to that url (all except the magnifying glass at the upper left, which will always enlarge the picture if possible). If no url is supplied (i.e. `url=""`), the whole image will be linked to the larger image (if available). If there’s no thumbnail file the zoom function will be disabled (you’ll see no loupe) and the whole picture is either linked to the url (if supplied) or static with no interaction.
@@ -148,33 +167,3 @@ Here are some EXIF grabbed from the PS XML inside the Exif aux field. These migh
 * %XResolution% - **3000000/10000**
 * %YResolution% - **3000000/10000**
 * %format% - **image/jpeg**
-
-== Installation ==
-
-You will need **PHP5** and **Wordpress2.1** or higher to use this plugin. Otherwise there is nothing more to set up, just download, extract into `/wordpress/wp-content/plugins` and activate. Check the admin panel "Options->ExZo" for further options (for example your email if you like).
-
-Note: the pictures should have been uploaded with the internal WordPress uploader - at least an entry in the `wp_posts` database should exist (needed to find the image file using only the filename).
-
-
-
-
-== Frequently Asked Questions ==
-
-= Modifying inline-uploading.php? =
-Modifying the inline-uploading.php is obsolete as of wordpress v2.1. Click here for a short tutorial on what to do now.
-
-= It doesn’t work: Parse error*: parse error, unexpected ')', expecting '(' in *[...]/wordpress/wp-content/plugins/exzo/exzo.php* =
-This is most likely due to the fact that your web server is not running on PHP 5, which we need for PEL.
-
-= Why another Exif/Picture/Zoom Plugin? =
-Basically because there is no other plug-in which is able to provide access to all Exif tags (f.e. the image number provided by Nikons D200). If you ask me, most existing plug ins only provide a rudimentary implementation. Apart from that, none of them includes an elegant lightbox-style way of zooming pictures. All in all that was reason enough to write ExZo.
-
-== Screenshots ==
-1. ExZo in action.
-2. Fully configurable in the admin options panel.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
