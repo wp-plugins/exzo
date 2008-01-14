@@ -87,66 +87,67 @@ the following tokens are standard EXIF tags. Most are self explanatory - I've st
 * %X_RESOLUTION% - **300**
 * %Y_RESOLUTION% - **300**
 
+= PS CS2 EXIF =
+Here are some EXIF grabbed from the PS XML inside the Exif aux field. These might vary if you are not using PS and are hence provided with limited support.
 
-
-%ApertureValue% - 5310704/1000000
-%ColorMode% - 3
-%ColorSpace% - -1
-%Compression% - 1
-%Contrast% - 0
-%CreateDate% - 2007-01-03T15:49:05+01:00
-%CreatorTool% - Adobe Photoshop CS2 Macintosh
-%CustomRendered% - 0
-%DateTimeDigitized% - 2007-01-01T16:26:50.57+01:00
-%DateTimeOriginal% - 2007-01-01T16:26:50.57+01:00
-%DigitalZoomRatio% - 1/1
-%ExposureBiasValue% - 0/6
-%ExposureMode% - 0
-%ExposureProgram% - 2
-%ExposureTime% - 1/160
-%FNumber% - 63/10
-%FileSource% - 3
-%Fired% - False
-%FocalLength% - 260/10
-%FocalLengthIn35mmFilm% - 39
-%Function% - False
-%GainControl% - 0
-%History% - n.a.
-%ICCProfile% - Adobe RGB (1998)
-%ImageLength% - 1925
-%ImageNumber% - 7505
-%ImageWidth% - 3423
-%Lens% - 17.0-55.0 mm f/2.8
-%LensInfo% - 170/10 550/10 28/10 28/10
-%LightSource% - 0
-%Make% - NIKON CORPORATION
-%MaxApertureValue% - 30/10
-%MetadataDate% - 2007-01-03T15:49:05+01:00
-%MeteringMode% - 5
-%Mode% - 0
-%Model% - NIKON D200
-%ModifyDate% - 2007-01-03T15:49:05+01:00
-%Orientation% - 1
-%PhotometricInterpretation% - 2
-%PixelXDimension% - 500
-%PixelYDimension% - 281
-%PlanarConfiguration% - 1
-%Rating% - 1
-%RedEyeMode% - False
-%ResolutionUnit% - 2
-%Return% - 0
-%SamplesPerPixel% - 3
-%Saturation% - 2
-%SceneCaptureType% - 0
-%SceneType% - 1
-%SensingMethod% - 2
-%Sharpness% - 2
-%ShutterSpeedValue% - 7321928/1000000
-%SubjectDistanceRange% - 0
-%WhiteBalance% - 0
-%XResolution% - 3000000/10000
-%YResolution% - 3000000/10000
-%format% - image/jpeg
+* %ApertureValue% - **5310704/1000000**
+* %ColorMode% - **3**
+* %ColorSpace% - **-1**
+* %Compression% - **1**
+* %Contrast% - **0**
+* %CreateDate% - **2007-01-03T15:49:05+01:00**
+* %CreatorTool% - **Adobe Photoshop CS2 Macintosh**
+* %CustomRendered% - **0**
+* %DateTimeDigitized% - **2007-01-01T16:26:50.57+01:00**
+* %DateTimeOriginal% - **2007-01-01T16:26:50.57+01:00**
+* %DigitalZoomRatio% - **1/1**
+* %ExposureBiasValue% - **0/6**
+* %ExposureMode% - **0**
+* %ExposureProgram% - **2**
+* %ExposureTime% - **1/160**
+* %FNumber% - **63/10**
+* %FileSource% - **3**
+* %Fired% - **False**
+* %FocalLength% - **260/10**
+* %FocalLengthIn35mmFilm% - **39**
+* %Function% - **False**
+* %GainControl% - **0**
+* %History% - **n.a.**
+* %ICCProfile% - **Adobe RGB (1998)**
+* %ImageLength% - **1925**
+* %ImageNumber% - **7505**
+* %ImageWidth% - **3423**
+* %Lens% - **17.0-55.0 mm f/2.8**
+* %LensInfo% - **170/10 550/10 28/10 28/10**
+* %LightSource% - **0**
+* %Make% - **NIKON CORPORATION**
+* %MaxApertureValue% - **30/10**
+* %MetadataDate% - **2007-01-03T15:49:05+01:00**
+* %MeteringMode% - **5**
+* %Mode% - **0**
+* %Model% - **NIKON D200**
+* %ModifyDate% - **2007-01-03T15:49:05+01:00**
+* %Orientation% - **1**
+* %PhotometricInterpretation% - **2**
+* %PixelXDimension% - **500**
+* %PixelYDimension% - **281**
+* %PlanarConfiguration% - **1**
+* %Rating% - **1**
+* %RedEyeMode% - **False**
+* %ResolutionUnit% - **2**
+* %Return% - **0**
+* %SamplesPerPixel% - **3**
+* %Saturation% - **2**
+* %SceneCaptureType% - **0**
+* %SceneType% - **1**
+* %SensingMethod% - **2**
+* %Sharpness% - **2**
+* %ShutterSpeedValue% - **7321928/1000000**
+* %SubjectDistanceRange% - **0**
+* %WhiteBalance% - **0**
+* %XResolution% - **3000000/10000**
+* %YResolution% - **3000000/10000**
+* %format% - **image/jpeg**
 
 == Installation ==
 
