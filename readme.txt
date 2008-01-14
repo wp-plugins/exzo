@@ -160,7 +160,8 @@ This is most likely due to the fact that your web server is not running on PHP 5
 Basically because there is no other plug-in which is able to provide access to all Exif tags (f.e. the image number provided by Nikons D200). If you ask me, most existing plug ins only provide a rudimentary implementation. Apart from that, none of them includes an elegant lightbox-style way of zooming pictures. All in all that was reason enough to write ExZo.
 
 == Screenshots ==
-
+1. ExZo in action.
+2. Fully configurable in the admin options panel.
 
 == Arbitrary section ==
 
