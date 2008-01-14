@@ -173,24 +173,24 @@ This WordPress plug is released under the <a href="http://www.gnu.org/licenses/g
 
 
 == Version History ==
-* 13.feb.2007	v0.b6.1	È new option: customisable alignment [Off | Left | Center | Right]
- > È pepped up the admin panel
- > È optimised code
+* 13.feb.2007 - v0.b6.1 - new option: customisable alignment [Off | Left | Center | Right]
+ > - pepped up the admin panel
+ > - optimised code
 * 12.feb.2007	v0.b6	Major (complete) rewrite
- > È Admin panel
- > È User definable templates
- > È Token based access to Exifs
- > È "Live preview" in admin panel
- > È new option: max thumbnail width
- > È new option: max thumbnail height
- > È new option: min table width
- > È new option: Title [Off / On / Force On]
- > È new option: Exif [Off / On / Force On]
- > È new option: overlay strings [for linked & static text]
- > È new option: error strings [no title / empty exif tag]
-* 02.feb.2007	v0.5.4	È Bugfix [Corrected Transitional XHTML Code]
-* 26.jan.2007	v0.5.3	È WordPress 2.1 Compatibility Update [adapted to new table wp_post table]
-* 21.jan.2007	v0.5.2	È Bugfix [bug in _getImagePath squashed]
-* 15.jan.2007	v0.5.1	È Bugfix [incorrect camera maker readout]
-* 14.jan.2007	v0.5	È got rid of Perl <sniff> by using the PEL-PHP-Library
-* 08.jan.2007	v0.4	È first public release
+ > - Admin panel
+ > - User definable templates
+ > - Token based access to Exifs
+ > - "Live preview" in admin panel
+ > - new option: max thumbnail width
+ > - new option: max thumbnail height
+ > - new option: min table width
+ > - new option: Title [Off / On / Force On]
+ > - new option: Exif [Off / On / Force On]
+ > - new option: overlay strings [for linked & static text]
+ > - new option: error strings [no title / empty exif tag]
+* 02.feb.2007 - v0.5.4 - Bugfix [Corrected Transitional XHTML Code]
+* 26.jan.2007 - v0.5.3 - WordPress 2.1 Compatibility Update [adapted to new table wp_post table]
+* 21.jan.2007 - v0.5.2 - Bugfix [bug in _getImagePath squashed]
+* 15.jan.2007 - v0.5.1 - Bugfix [incorrect camera maker readout]
+* 14.jan.2007 - v0.5 - got rid of Perl <sniff> by using the PEL-PHP-Library
+* 08.jan.2007 - v0.4 - first public release
