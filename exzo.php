@@ -6,7 +6,7 @@ Plugin URI: http://blog.vimagic.de/exif-zoom-wordpress-plugin/
 
 Description: Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).  All options available in the <a href="options-general.php?page=exzo.php">ExZo options</a> panel.
 
-Version: 0.b6.5
+Version: 0.b6.6
 
 Author: Thomas M. B&ouml;sel
 Author URI: http://blog.vimagic.de/
@@ -578,10 +578,11 @@ class WpExZo {
 			// 	SOME MODIFICATIONS TO PERSONAL FLAVOR	//
 			//  FEEL FREE TO CHANGE OR DELETE EM ;)		//
 			//////////////////////////////////////////////
-			$exif2 = exif_read_data($img_path, 0, true);								### PEL NEEDS THE PHP CALENDAR EXTENSION TO CORRECTLY READ DATE&TIME
-			$this->EXIF['DATE_TIME'] = $exif2['EXIF']['DateTime'];						### WHICH ON SOME UNIX BOXES IS NOT INCLUDED IN THE STANDARD PHP COMPILATION
-			$this->EXIF['DATE_TIME_DIGITIZED'] = $exif2['EXIF']['DateTimeDigitized'];	### HENCE WE SWITCHED TO exif_read_data() FOR DATE&TIME TAGS ...
-			$this->EXIF['DATE_TIME_ORIGINAL'] = $exif2['EXIF']['DateTimeOriginal'];
+			require_once('exifer/exif.php');
+			$exif2 = read_exif_data_raw($img_path, 0);									### PEL NEEDS THE PHP CALENDAR EXTENSION TO CORRECTLY READ DATE&TIME
+			$this->EXIF['DATE_TIME'] = $exif2['IFD0']['DateTime'];						### WHICH ON SOME UNIX BOXES IS NOT INCLUDED IN THE STANDARD PHP COMPILATION
+			$this->EXIF['DATE_TIME_DIGITIZED'] = $exif2['SubIFD']['DateTimeDigitized'];	### HENCE WE SWITCHED TO EXIFER FOR DATE&TIME TAGS ...
+			$this->EXIF['DATE_TIME_ORIGINAL'] = $exif2['SubIFD']['DateTimeOriginal'];
 			$this->EXIF['DATETIME']	= preg_replace('#(.*?)-(.*?)-(.*?)T(.*)\+(.*)#','$3.$2.$1&nbsp;$4+$5',$this->EXIF['DateTimeOriginal']);
 			$this->EXIF['CAM'] 				= str_replace('NIKON','',$this->EXIF['MODEL']);
 			$this->EXIF['MAKE'] 				= str_replace(' CORPORATION','',$this->EXIF['MAKE']);
