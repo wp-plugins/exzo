@@ -11,7 +11,7 @@ Displays Images (JPG), the corresponding Exif (if available) and provides zoom f
 
 ExZo is a plugin that displays jpgs, some (or all) of their Exif tags and bundles a zoom functionality. User definable templates and token access to any Exif tag and a life preview of each in the admin panel are core features.
 
-**New:** as of version 0.b6.4 you can use ExZo to display Exif only.
+**New:** as of version 0.b6.4 you can use ExZo to display Exif only!
 
 
 == Installation ==
