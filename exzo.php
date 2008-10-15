@@ -6,7 +6,7 @@ Plugin URI: http://blog.vimagic.de/exif-zoom-wordpress-plugin/
 
 Description: Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).  All options available in the <a href="options-general.php?page=exzo.php">ExZo options</a> panel.
 
-Version: 0.b6.6
+Version: 0.b7.1
 
 Author: Thomas M. B&ouml;sel
 Author URI: http://blog.vimagic.de/
@@ -51,6 +51,7 @@ class WpExZo {
 	var $user_border;				// WIDTH OF BORDER
 	var $user_align;				// ALIGN STRING 0=OFF, 1=LEFT, 2=CENTER, 3=RIGHT
 	var $user_thumbnail_extension;	// 
+	var $user_use_wordpress_thumbs;	// 
 
 	//////////////////
 	// VARIABLES 	//
@@ -91,6 +92,7 @@ class WpExZo {
 		$this->user_border=30;
 		$this->user_align=2;
 		$this->user_thumbnail_extension='.thumbnail';
+		$this->user_use_wordpress_thumbs=1;
 		
 		$this->options= array (
 			'user_html_title' 		=> 'html',
@@ -110,7 +112,8 @@ class WpExZo {
 			'user_preview_filename'	=> 'string',
 			'user_thumbnail_extension'	=> 'string',
 			'user_border' 			=> 'int',
-			'user_align' 			=> 'int'
+			'user_align' 			=> 'int',
+			'user_use_wordpress_thumbs'	=> 'bool'
 		);
 		
 		$this->pluginURL = trailingslashit(get_settings('siteurl')) . 'wp-content/plugins/exzo';
@@ -147,6 +150,7 @@ class WpExZo {
 		add_option('exzo_user_border', $this->user_border,'BORDER IN PIXEL','no');
 		add_option('exzo_user_align', $this->user_align,'ALIGN TABLE','no');
 		add_option('exzo_user_thumbnail_extension', $this->user_thumbnail_extension,'THUMBNAIL EXTENSION','no');
+		add_option('exzo_user_use_wordpress_thumbs', $this->user_use_wordpress_thumbs,'USE WP THUMBNAIL','no');
 	}
 
 	//////////////////////////////////////////////////////////////////////////////
@@ -223,19 +227,18 @@ class WpExZo {
 	//////////////////////////////////////////////////////////////////////////////
 	// _fetchExif()  FETCHING EXIF FROM THE IMAGE FILE 							//
 	//////////////////////////////////////////////////////////////////////////////
-	function _fetchExif($name,$extension,$img_path)	{
+	function _fetchExif($name,$extension,$img_path,$img_path_smal)	{
 		require_once('pel_lw/PelJpeg.php');
 		/////////////////////////////////////////////////////////////////
 		// DETERMINE, WETHER WE CAN ZOOM OR NOT (THUMBNAIL AVAILABLE?) //
 		/////////////////////////////////////////////////////////////////
-		if(!file_exists($img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path)))	{
+#		if(!file_exists($img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path)))	{
+		if(!file_exists($img_path_smal))	{
 			$this->zoom=0;
-#			$jpeg = new PelJpeg($img_path);
 			$jpeg_noexif = ImageCreateFromJpeg($img_path);
 		}
 		else	{
 			$this->zoom=1;
-#			$jpeg = new PelJpeg($img_path_smal);
 			$jpeg_noexif = ImageCreateFromJpeg($img_path_smal);
 		}
 		$jpeg = new PelJpeg($img_path);
@@ -584,10 +587,10 @@ class WpExZo {
 			$this->EXIF['DATE_TIME_DIGITIZED'] = $exif2['SubIFD']['DateTimeDigitized'];	### HENCE WE SWITCHED TO EXIFER FOR DATE&TIME TAGS ...
 			$this->EXIF['DATE_TIME_ORIGINAL'] = $exif2['SubIFD']['DateTimeOriginal'];
 			$this->EXIF['DATETIME']	= preg_replace('#(.*?)-(.*?)-(.*?)T(.*)\+(.*)#','$3.$2.$1&nbsp;$4+$5',$this->EXIF['DateTimeOriginal']);
-			$this->EXIF['CAM'] 				= str_replace('NIKON','',$this->EXIF['MODEL']);
-			$this->EXIF['MAKE'] 				= str_replace(' CORPORATION','',$this->EXIF['MAKE']);
-			$this->EXIF['SHUTTER']			= str_replace(' sec.','&nbsp;s',$this->EXIF['EXPOSURE_TIME']);
-			$this->EXIF['FOCAL'] 			= str_replace('.0 mm','&nbsp;mm',$this->EXIF['FOCAL_LENGTH']);
+			$this->EXIF['CAM'] 		= str_replace('NIKON','',$this->EXIF['MODEL']);
+			$this->EXIF['MAKE'] 	= str_replace(' CORPORATION','',$this->EXIF['MAKE']);
+			$this->EXIF['SHUTTER']	= str_replace(' sec.','&nbsp;s',$this->EXIF['EXPOSURE_TIME']);
+			$this->EXIF['FOCAL'] 	= str_replace('.0 mm','&nbsp;mm',$this->EXIF['FOCAL_LENGTH']);
 			$foo=explode('/',$this->EXIF['X_RESOLUTION']);
 			if(is_numeric($foo[1]) && $foo[1]!=0) {$this->EXIF['X_RESOLUTION']=intval($foo[0])/intval($foo[1]);}
 			$foo=explode('/',$this->EXIF['Y_RESOLUTION']);
@@ -626,11 +629,52 @@ class WpExZo {
 			$img_path_html=$this->pluginURL.'/images/exzo_dummy.jpg';
 		}
 		else	{
-			$file_name 		= stripslashes(trim($name)) . '.' .stripslashes(trim($extention));
-			$option 		= stripslashes(trim($option));
-			$img_path 		= $this->_getImagePath($file_name,1);
-			$img_path_html 	= $this->_getImagePath($file_name,0);
+			if(ereg('wp-content',$name))	{
+				$file_name 		= stripslashes(trim($name)) . '.' .stripslashes(trim($extention));
+				$option 		= stripslashes(trim($option));
+				$img_path 		= ABSPATH.$file_name;
+				$img_path_html 	= get_settings('siteurl').$file_name;
+			}
+			else	{
+				$file_name 		= stripslashes(trim($name)) . '.' .stripslashes(trim($extention));
+				$option 		= stripslashes(trim($option));
+
+#				$img_path		= $this->_getImagePath($file_name,1);
+#				$img_path_html 	= $this->_getImagePath($file_name,0);
+				list($img_path,$img_path_html,$img_wp_thumb) = $this->_getImagePath($file_name);
+#				echo "<b>DEBUG:</b> $img_wp_thumb<br />";
+			}
 		}
+
+
+		if($this->user_use_wordpress_thumbs)	{
+			$img_path_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path);
+			$img_path_html_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path_html);
+#			echo "DEBUG: $img_path_smal<br />";
+			if(!file_exists($img_path_smal))	{
+				$img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);
+				$img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html);
+			}
+			if(!file_exists($img_path_smal))	{
+				$img_path_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path);
+				$img_path_html_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path_html);			
+			}
+		}
+		else	{
+			$img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);
+			$img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html);
+			if(!file_exists($img_path_smal))	{
+				$img_path_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path);
+				$img_path_html_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path_html);			
+			}
+			if(!file_exists($img_path_smal))	{
+				$img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);
+				$img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html);
+			}
+		}
+
+
+
 		if($title=='exzo_dummy_title')	{$title='This will be your image title';}
 
 		////////////////////
@@ -638,7 +682,7 @@ class WpExZo {
 		////////////////////
 		if(!file_exists($img_path)) 	{
 			if($img_path=='')	{return '<p>No Image File Provided (filename='.$file_name.', name='.$name.')</p>';}
-			else	{return '<p>Image file not found(ImagePath:'.$img_path.')</p>';}
+			else				{return '<p>Image file not found(ImagePath:'.$img_path.')</p>';}
 		}
 		if($title != '')	{$this->title=$title;}
 		else				{$this->title=$this->user_untitled;}
@@ -646,21 +690,30 @@ class WpExZo {
 		//////////////////
 		// LETS ROCK!!!	//
 		//////////////////
-		$this->_fetchExif($name,$extension,$img_path);
+		$this->_fetchExif($name,$extension,$img_path,$img_path_smal);
 		
 		///////////////////////////////////////////////////////
 		// 	SORTING IMAGE AND TABLE SIZES					 //
-		///////////////////////////////////////////////////////		    
+		///////////////////////////////////////////////////////
+		if($this->user_use_wordpress_thumbs)	{
+			$max_vertical_pic=get_option(medium_size_h);
+			$max_horizontal_pic=get_option(medium_size_w);
+		}
+		else	{
+			$max_vertical_pic=$this->user_max_vertical_pic;
+			$max_horizontal_pic=$this->user_max_horizontal_pic;		
+		}
+		
 		if($this->imgWidth<=$this->imgHeight)	{					//PORTRAIT
-			if($this->imgHeight>$this->user_max_vertical_pic)	{	//PIC TOO HIGH
-				$this->imgWidth=$this->user_max_vertical_pic*$this->imgWidth/$this->imgHeight;
-				$this->imgHeight=$this->user_max_vertical_pic;
+			if($this->imgHeight>$max_vertical_pic)	{	//PIC TOO HIGH
+				$this->imgWidth=$max_vertical_pic*$this->imgWidth/$this->imgHeight;
+				$this->imgHeight=$max_vertical_pic;
 			}
 		}
 		else	{
-			if($this->imgWidth>$this->user_max_horizontal_pic)	{	//PIC TOO WIDE
-				$this->imgHeight=$this->user_max_horizontal_pic*$this->imgHeight/$this->imgWidth;
-				$this->imgWidth=$this->user_max_horizontal_pic;
+			if($this->imgWidth>$max_horizontal_pic)	{	//PIC TOO WIDE
+				$this->imgHeight=$max_horizontal_pic*$this->imgHeight/$this->imgWidth;
+				$this->imgWidth=$max_horizontal_pic;
 			}
 		}
 		if($this->imgWidth+(2*$this->user_border)<$this->user_min_table)	{
@@ -669,11 +722,14 @@ class WpExZo {
 		else	{
 			$this->tableWidth=$this->imgWidth+(2*$this->user_border);
 		}
+		$this->imgHeight=floor($this->imgHeight);
+		$this->imgWidth=floor($this->imgWidth);
+		
 	
 		////////////////////////////
 		// ASSAMBLING HTML-STRING //
 		////////////////////////////
-		$print_exif="<!-- BEGIN ExZo v.0b6 -->";
+		$print_exif="<!-- BEGIN ExZo v0.b7.1 -->";
 		switch($this->user_align)	{
 			case 0:
 				break;
@@ -700,7 +756,7 @@ class WpExZo {
 			$print_exif.="<table width=\"".($this->imgWidth+4+(2*$this->user_border))."\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 			$print_exif.="<tr>";
 			if($this->zoom)	{	/* SHOWING THUMBNAIL OF REFERENCED IMAGE */
-		  	   	$print_exif.="<td><div class=\"iemahge\" style=\"background-image:url(".($img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html))."); width: ".$this->imgWidth."px; height: ".$this->imgHeight."px\"><div class=\"OpaDiv\">";
+		  	   	$print_exif.="<td><div class=\"iemahge\" style=\"background-image:url(".$img_path_html_smal."); width: ".$this->imgWidth."px; height: ".$this->imgHeight."px\"><div class=\"OpaDiv\">";
 	 			$print_exif.="<a href=\"$img_path_html\" rel=\"zoom\" title=\"$title\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/zoom/lupe2.png\" alt=\"Click to enlarge picture\" /></a>";
 				if($urll!="")	{
 					$print_exif.="<a href=\"$urll\" title=\"Read full article\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/images/empty.gif\" height=\"18\" width=\"".($this->imgWidth-18)."\" border=\"0\" alt=\"$title\" /></a><br />";
@@ -744,7 +800,7 @@ class WpExZo {
 			elseif($this->user_show_exif>1)	{$print_exif.=$this->_substitute($this->user_html_exif_OFF);}
 		}
 		if($this->user_align>0)	{$print_exif.="</div>";}
-		$print_exif.="<!-- END ExZo v.0b6 -->";
+		$print_exif.="<!-- END ExZo v0.b7.1 -->";
 
 		return $print_exif;
 	}
@@ -752,29 +808,53 @@ class WpExZo {
 	//////////////////////////////////////////////////////////////////////////
 	//	_getImagePath()  SELFEXPLANITORY ;)									//
 	//////////////////////////////////////////////////////////////////////////
-	function _getImagePath($img_file, $global) {
+	function _getImagePath($img_file) {
 		$img_path = "";
 		$img_file_mod = str_replace($this->user_thumbnail_extension,'',$img_file);
 		$bool=0;
 		if($img_file_mod != $img_file)	{$bool=1;}
 		global $wpdb, $post;
-		$query = "SELECT `guid` FROM `".$wpdb->posts."`";
-		$query .= " WHERE `post_status` = 'inherit'";
-		$query .= " AND `post_mime_type` = 'image/jpeg'";
+		
+		if($this->user_use_wordpress_thumbs==0)	{
+	 		$query = "SELECT `guid` FROM `".$wpdb->posts."` WHERE `post_status` = 'inherit' AND `post_mime_type` = 'image/jpeg'";
+	 	}
+	 	else	{
+			$query="SELECT `guid`,`meta_value` FROM `".$wpdb->posts."` LEFT JOIN `".$wpdb->postmeta."` ON ".$wpdb->posts.".id=".$wpdb->postmeta.".post_id WHERE `post_status` = 'inherit' AND `post_mime_type` = 'image/jpeg' AND `meta_key` = '_wp_attachment_metadata'";
+		}
+				
 		if( $results = $wpdb->get_results($query) ) {
 			foreach($results as $r) {
 				if( basename(trim($r->guid)) == $img_file_mod ) {
 					$siteurl = trailingslashit(get_settings('siteurl'));
 					$related_path = str_replace($siteurl, '', $r->guid);
-					if($global==1)	{$img_path = ABSPATH . $related_path;}
-					else	{$img_path = get_settings('siteurl') .'/'. $related_path;}
+
+					$img_path = ABSPATH . $related_path;
+					$img_path_html = get_settings('siteurl') .'/'. $related_path;
+					if($this->user_use_wordpress_thumbs)	{
+						$wp_thumbname=$this->_parseMeta2fetchWPthumb($r->meta_value,$img_file_mod);
+					}
 					break;
 				}
 			}
 		}
 		if($bool)	{$img_path = str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);}
-		return $img_path;
+		
+		$array=array($img_path,$img_path_html,$wp_thumbname);
+		
+		return $array;
 	}
+	
+	
+	//////////////////////////////////////////////////////////////////////////
+	//	_parseMeta2fetchWPthumb() 											//
+	//////////////////////////////////////////////////////////////////////////
+	function _parseMeta2fetchWPthumb($meta,$img) {
+#		return preg_replace("/(.*s:33:\")(.*?)(\".*)/","$2",$meta);
+#		return preg_replace("/.*s:33:\"(.*?)\".*/","\\1",$meta);
+#		$img = str_replace('.jpg','',$img);
+		return preg_replace("/.*:\"(".(str_replace('.jpg','',$img))."-.*?)\".*/","\\1",$meta);
+	}
+	
 
 	//////////////////////////////////////////////////////////////////////////
 	//	_filter()  SELFEXPLANITORY ;)										//
@@ -782,7 +862,7 @@ class WpExZo {
 	function _filter($text) {
 		$text = str_replace('TMB_PERM', get_permalink(),$text);
 		$text = preg_replace('#\[exzo.url="(.*?)".title="(.*?)".*?\](.*?)\.(jpg|jpeg)(.*?)\[/exzo\]#sie', '$this->_exzo(\'$3\', \'$4\', \'$1\',\'$2\',\'0\')', $text);
-		$text = preg_replace('#\[exif.img="(.*?)\.(jpg|jpeg)"\]#sie', '$this->_exzo(\'$1\', \'$2\', \'\',\'\',\'1\')', $text);
+		$text = preg_replace('#\[exif="(.*?)\.(jpg|jpeg)"\]#sie', '$this->_exzo(\'$1\', \'$2\', \'\',\'\',\'1\')', $text);
 		return $text;
 	}
 	
@@ -833,6 +913,17 @@ class WpExZo {
 				$align_string='[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Alignment:&nbsp;right</font>]';
 				break;
 		}
+		switch($this->user_use_wordpress_thumbs)	{
+			case 0:
+				$use_wordpress_thumbs_no=' checked="checked"';
+				break;
+			case 1:
+				$use_wordpress_thumbs_yes=' checked="checked"';
+				break;
+			default:
+		}
+		
+		
 		print('
 			<form name="exzo" action="'.get_bloginfo('wpurl').'/wp-admin/options-general.php" method="post">
 			<input type="hidden" name="exzo_action" value="exzo__updateSettings" />
@@ -840,26 +931,37 @@ class WpExZo {
 				<h2>'.__('&#187; General ExZo Setup', 'blog.vimagic.de').'</h2>
 					<fieldset class="options">
 						<table border="0" cellspacing="5" cellpadding="0">
+
+						<tr><td align="right" rowspan="2" valign="middle"><strong>
+						<label for="use_wordpress">'.__('Prefered Thumbs:', 'blog.vimaigc.de').'</label></strong></td><td>&nbsp;</td><td align="left" width="100">
+						<input type="radio" name="user_use_wordpress_thumbs" value="1" '.$use_wordpress_thumbs_yes.'/> Wordpress
+						</td><td>&nbsp;</td><td>
+						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Using Wordpress\' medium thumbnails.  Change settings <a href="options-misc.php">here</a>.</font>]</td></tr>
+						<tr><td>&nbsp;</td><td align="left">
+						<input type="radio" name="user_use_wordpress_thumbs" value="0" '.$use_wordpress_thumbs_no.'/> User
+						</td><td>&nbsp;</td><td>
+						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Using settings below.</font>]</td></tr>
+						
 						<tr><td align="right" width="250">
 						<strong><label for="user_max_horizontal_pic">'.__('(max)&nbsp;Thumbnail&nbsp;width&nbsp;(panoramic):', 'blog.vimaigc.de').'</label></strong>
 						</td><td>&nbsp;</td><td align="left">
 						<input type="text" name="user_max_horizontal_pic" size="4" value="'.$this->user_max_horizontal_pic.'" />px
 						</td><td>&nbsp;</td><td>
-						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Maximal horizontal image size (which is my thumbnail width for panoramic pictures)</font>]</td></tr>
+						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Maximal horizontal image size when <b>not</b> using the WP thumbs.</font>]</td></tr>
 						</td></tr>
 						<tr><td align="right">
 						<strong><label for="user_max_vertical_pic">'.__('(max) Thumbnail height (portrait):', 'blog.vimaigc.de').'</label></strong>
 						</td><td>&nbsp;</td><td align="left">
 						<input type="text" name="user_max_vertical_pic" size="4" value="'.$this->user_max_vertical_pic.'" />px
 						</td><td>&nbsp;</td><td>
-						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Maximal vertical image size (which is my thumbnail heigth for portrait pictures)</font>]</td></tr>
+						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Maximal vertical image size when <b>not</b> using the WP thumbs.</font>]</td></tr>
 						</td></tr>
 						
 						<tr><td align="right" valign="top" width="250">
 						<strong><label for="user_author_email">'.__('Thumbnail Extension:', '.thumbnail').'</label></strong>
 						</td><td>&nbsp;</td><td colspan="3" >
 						<input type="text" name="user_thumbnail_extension" size="25" value="'.$this->user_thumbnail_extension.'" />&nbsp;
-						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Unique thumbnail extension.  Used to be &quot;.thumbnail&quot; - as of WP2.5 it depends on the thumbnail size (f.e: &quot;-242x300&quot;).</font>]</td></tr>
+						[<font style="color:#bbb;font-weight:bold;font-size:0.75em;">Unique thumbnail extension when <b>not</b> using the WP thumbs.]</td></tr>
 						</td></tr>
 						
 						

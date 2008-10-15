@@ -2,8 +2,8 @@
 Contributors: tmb
 Tags: exif, zoom, formating, lightbox, images, picture, photo, foto,
 Requires at least: 2.1
-Tested up to: 2.5.1
-Stable tag: 0.6.6
+Tested up to: 2.6.2
+Stable tag: 0.7.1
 
 Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).
 
@@ -13,6 +13,7 @@ ExZo is a plugin that displays jpgs, some (or all) of their Exif tags and bundle
 
 **New:** as of version 0.b6.4 you can use ExZo to display Exif only!
 
+**New:** as of version 0.b7 ExZo handles WordPress generated thumbs.
 
 == Installation ==
 
@@ -182,6 +183,9 @@ This WordPress plug is released under the <a href="http://www.gnu.org/licenses/g
 
 == Version History ==
 
+* **15.oct.2008 - v0.b7.1** - new feature: thumbnail handling optimized
+* **01.oct.2008 - v0.b7** - new option: thumbnail choice
+* **06.jun.2008 - v0.b6.7** - new feature: compatible to most gallery plugins
 * **05.jun.2008 - v0.b6.6** - bugfix: Date/Time issue solved
 * **03.jun.2008 - v0.b6.5** - new feature: all PEL tokens now available
  > - bugfix: iPhone support
