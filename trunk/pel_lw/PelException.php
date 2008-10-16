@@ -1,1 +1,0 @@
-<?php class PelException extends Exception { function __construct() { $args = func_get_args(); $fmt = array_shift($args); parent::__construct(vsprintf($fmt, $args)); } } class PelInvalidDataException extends PelException {} class PelInvalidArgumentException extends PelException {} ?>
