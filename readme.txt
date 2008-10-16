@@ -3,7 +3,7 @@ Contributors: tmb
 Tags: exif, zoom, formating, lightbox, images, picture, photo, foto,
 Requires at least: 2.1
 Tested up to: 2.6.2
-Stable tag: 0.7.1
+Stable tag: 0.7.1a
 
 Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).
 
