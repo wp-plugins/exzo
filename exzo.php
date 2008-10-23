@@ -6,7 +6,7 @@ Plugin URI: http://blog.vimagic.de/exif-zoom-wordpress-plugin/
 
 Description: Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).  All options available in the <a href="options-general.php?page=exzo.php">ExZo options</a> panel.
 
-Version: 0.b7.1
+Version: 0.b7.2
 
 Author: Thomas M. B&ouml;sel
 Author URI: http://blog.vimagic.de/
@@ -646,11 +646,9 @@ class WpExZo {
 			}
 		}
 
-
 		if($this->user_use_wordpress_thumbs)	{
 			$img_path_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path);
 			$img_path_html_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path_html);
-#			echo "DEBUG: $img_path_smal<br />";
 			if(!file_exists($img_path_smal))	{
 				$img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);
 				$img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html);
@@ -664,10 +662,14 @@ class WpExZo {
 			$img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);
 			$img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html);
 			if(!file_exists($img_path_smal))	{
+				$this->user_use_wordpress_thumbs=1;
+				list($img_path,$img_path_html,$img_wp_thumb) = $this->_getImagePath($file_name);
 				$img_path_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path);
 				$img_path_html_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path_html);			
 			}
 			if(!file_exists($img_path_smal))	{
+				$this->user_use_wordpress_thumbs=0;
+				list($img_path,$img_path_html,$img_wp_thumb) = $this->_getImagePath($file_name);
 				$img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);
 				$img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html);
 			}
@@ -729,7 +731,7 @@ class WpExZo {
 		////////////////////////////
 		// ASSAMBLING HTML-STRING //
 		////////////////////////////
-		$print_exif="<!-- BEGIN ExZo v0.b7.1 -->";
+		$print_exif="<!-- BEGIN ExZo v0.b7.2 -->";
 		switch($this->user_align)	{
 			case 0:
 				break;
@@ -752,7 +754,7 @@ class WpExZo {
 		if($this->user_link_text_static=='' && $this->user_link_text=='')	{$spacer=0;}
 		else	{$spacer=15;}
 		
-		if($exifonly==0)	{
+		if($exifonly!=1)	{
 			$print_exif.="<table width=\"".($this->imgWidth+4+(2*$this->user_border))."\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\">";
 			$print_exif.="<tr>";
 			if($this->zoom)	{	/* SHOWING THUMBNAIL OF REFERENCED IMAGE */
@@ -790,7 +792,7 @@ class WpExZo {
 		}
 
 		// EXIF - NOW USERDEFINED - WHOOHOO! //
-		if($this->user_show_exif>0)	{
+		if($this->user_show_exif>0 && $exifonly!=2)	{
 			if($this->GO && 
 				($this->_printExif('FOCAL') != $this->user_not_available || 
 				 $this->_printExif('ISO') != $this->user_not_available || 
@@ -800,7 +802,7 @@ class WpExZo {
 			elseif($this->user_show_exif>1)	{$print_exif.=$this->_substitute($this->user_html_exif_OFF);}
 		}
 		if($this->user_align>0)	{$print_exif.="</div>";}
-		$print_exif.="<!-- END ExZo v0.b7.1 -->";
+		$print_exif.="<!-- END ExZo v0.b7.2 -->";
 
 		return $print_exif;
 	}
@@ -862,6 +864,7 @@ class WpExZo {
 	function _filter($text) {
 		$text = str_replace('TMB_PERM', get_permalink(),$text);
 		$text = preg_replace('#\[exzo.url="(.*?)".title="(.*?)".*?\](.*?)\.(jpg|jpeg)(.*?)\[/exzo\]#sie', '$this->_exzo(\'$3\', \'$4\', \'$1\',\'$2\',\'0\')', $text);
+		$text = preg_replace('#\[zonoex.url="(.*?)".title="(.*?)".*?\](.*?)\.(jpg|jpeg)(.*?)\[/zonoex\]#sie', '$this->_exzo(\'$3\', \'$4\', \'$1\',\'$2\',\'2\')', $text);
 		$text = preg_replace('#\[exif="(.*?)\.(jpg|jpeg)"\]#sie', '$this->_exzo(\'$1\', \'$2\', \'\',\'\',\'1\')', $text);
 		return $text;
 	}
@@ -1254,3 +1257,4 @@ if (!empty($_POST['exzo_action'])) {
 }
 
 ?>
+

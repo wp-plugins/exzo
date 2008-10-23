@@ -3,7 +3,7 @@ Contributors: tmb
 Tags: exif, zoom, formating, lightbox, images, picture, photo, foto,
 Requires at least: 2.1
 Tested up to: 2.6.2
-Stable tag: 0.7.1a
+Stable tag: 0.7.2
 
 Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).
 
@@ -14,6 +14,8 @@ ExZo is a plugin that displays jpgs, some (or all) of their Exif tags and bundle
 **New:** as of version 0.b6.4 you can use ExZo to display Exif only!
 
 **New:** as of version 0.b7 ExZo handles WordPress generated thumbs.
+
+**New:** as of version 0.b7.2 it is possible to show images only
 
 == Installation ==
 
@@ -183,24 +185,21 @@ This WordPress plug is released under the <a href="http://www.gnu.org/licenses/g
 
 == Version History ==
 
+* **23.oct.2008 - v0.b7.2** - new feature: show image only [using token "zonoex"]
+	> - bugfix: rare bug while using both WP and user defined thumbs squashed
 * **15.oct.2008 - v0.b7.1** - new feature: thumbnail handling optimized
 * **01.oct.2008 - v0.b7** - new option: thumbnail choice
 * **06.jun.2008 - v0.b6.7** - new feature: compatible to most gallery plugins
 * **05.jun.2008 - v0.b6.6** - bugfix: Date/Time issue solved
 * **03.jun.2008 - v0.b6.5** - new feature: all PEL tokens now available
-
 	> - bugfix: iPhone support
 	> - bugfix: Date/Time issue addressed
-
 * **02.jun.2008 - v0.b6.4** - new feature: show Exif only
 * **06.mar.2008 - v0.b6.3** - new option: customisable thumbnail extension
 * **13.feb.2007 - v0.b6.1** - new option: customisable alignment [Off | Left | Center | Right]
-
 	> - pepped up the admin panel
 	> - optimised code
-
 * **12.feb.2007 - v0.b6** - Major (complete) rewrite
-
 	> - Admin panel
 	> - User definable templates
 	> - Token based access to Exifs
@@ -212,7 +211,6 @@ This WordPress plug is released under the <a href="http://www.gnu.org/licenses/g
 	> - new option: Exif [Off / On / Force On]
 	> - new option: overlay strings [for linked & static text]
 	> - new option: error strings [no title / empty exif tag]
-
 * **02.feb.2007 - v0.5.4** - Bugfix [Corrected Transitional XHTML Code]
 * **26.jan.2007 - v0.5.3** - WordPress 2.1 Compatibility Update [adapted to new table wp_post table]
 * **21.jan.2007 - v0.5.2** - Bugfix [bug in _getImagePath squashed]
