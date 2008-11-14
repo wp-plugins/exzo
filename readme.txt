@@ -2,8 +2,8 @@
 Contributors: tmb
 Tags: exif, zoom, formating, lightbox, images, picture, photo, foto,
 Requires at least: 2.1
-Tested up to: 2.6.2
-Stable tag: 0.7.2
+Tested up to: 2.6.3
+Stable tag: 0.7.3
 
 Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).
 
@@ -185,6 +185,11 @@ This WordPress plug is released under the <a href="http://www.gnu.org/licenses/g
 
 == Version History ==
 
+* **14.nov.2008 - v0.b7.3** - several bugfixes
+	> - bugfix: GPS data now fetched correctly [GPS is not part of the EXIF block within IFD0 ... duh]
+	> - bugfix: memorey leak fixed [now erasing all exif before closing]
+	> - bugfix: text encoding error fixed [causing Wordpress to break with some header error]
+	> - new default: GPS location now in default layout [added geotagged image as well]
 * **23.oct.2008 - v0.b7.2** - new feature: show image only [using token "zonoex"]
 	> - bugfix: rare bug while using both WP and user defined thumbs squashed
 * **15.oct.2008 - v0.b7.1** - new feature: thumbnail handling optimized
