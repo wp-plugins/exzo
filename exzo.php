@@ -6,7 +6,7 @@ Plugin URI: http://blog.vimagic.de/exif-zoom-wordpress-plugin/
 
 Description: Displays Images (JPG), the corresponding Exif (if available) and provides zoom functionality (based on Lightbox).  All options available in the <a href="options-general.php?page=exzo.php">ExZo options</a> panel.
 
-Version: 0.b7.2
+Version: 0.b7.3
 
 Author: Thomas M. B&ouml;sel
 Author URI: http://blog.vimagic.de/
@@ -72,11 +72,7 @@ class WpExZo {
 	function WpExZo() {
 		$this->user_html_title="<table width=\"%tableWidth%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"exif\"><tr valign=\"middle\"><td class=\"header_last\" width=\"50\">Title</td><td class=\"content_bright_last\">&nbsp;&nbsp;&nbsp;</td><td class=\"content_bright_last\" width=\"%tableWidth-50%\">%title%</td></tr></table>";
 		$this->user_html_picture="test_picture";
-		$this->user_html_exif_ON="<table width=\"%tableWidth%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"exif\">
-<tr valign=\"middle\"><td class=\"header\">Cam&Lens</td><td class=\"content_dark\">&nbsp;</td><td class=\"content_dark\">%CAM% & %LENS%</td><td width=\"30\">&nbsp;&nbsp;&nbsp;</td><td class=\"header\">Shutter:</td><td class=\"content_bright\">&nbsp;</td><td class=\"content_bright\">%SHUTTER%</td></tr>
-<tr valign=\"middle\"><td class=\"header\">Flash:</td><td class=\"content_dark\">&nbsp;</td><td class=\"content_dark\">%FLASH%</td><td>&nbsp;&nbsp;&nbsp;</td><td class=\"header\">Aperture:</td><td class=\"content_bright\">&nbsp;</td><td class=\"content_bright\">%APERTURE%</td></tr>
-<tr valign=\"middle\"><td class=\"header\">Create Date:</td><td class=\"content_bright\">&nbsp;</td><td class=\"content_bright\">%DATETIME%</td><td>&nbsp;&nbsp;&nbsp;</td><td class=\"header\">ISO:</td><td class=\"content_bright\">&nbsp;</td><td class=\"content_bright\">%ISO%</td></tr>
-<tr valign=\"middle\"><td class=\"header_last\">Image&nbsp;Number:</td><td class=\"content_dark_last\">&nbsp;</td><td class=\"content_dark_last\">%IMAGENUMBER%</td><td>&nbsp;&nbsp;&nbsp;</td><td class=\"header_last\">Focal&nbsp;Length:</td><td class=\"content_bright_last\">&nbsp;</td><td class=\"content_bright_last\">%FOCAL%</td></tr></table>";
+		$this->user_html_exif_ON='<table width="%tableWidth%" border="0" cellspacing="0" cellpadding="0" class="exif"><tr valign="middle"><td class="header">Cam&Lens</td><td class="content_dark">&nbsp;</td><td class="content_dark">%CAM% (%MAKE%) & %LENS%</td><td width="30">&nbsp;&nbsp;&nbsp;</td><td class="header">Shutter:</td><td class="content_bright">&nbsp;</td><td class="content_bright">%SHUTTER%</td></tr><tr valign="middle"><td class="header">Create Date:</td><td class="content_dark">&nbsp;</td><td class="content_bright">%DATETIME%</td><td>&nbsp;&nbsp;&nbsp;</td><td class="header">Aperture:</td><td class="content_bright">&nbsp;</td><td class="content_bright">%APERTURE%</td></tr><tr valign="middle"><td class="header">Location:</td><td class="content_bright">&nbsp;</td><td class="content_dark">%GPS_COMBINED%</td><td>&nbsp;&nbsp;&nbsp;</td><td class="header">ISO:</td><td class="content_bright">&nbsp;</td><td class="content_bright">%ISO%</td></tr><tr valign="middle"><td class="header_last">Image&nbsp;Number:</td><td class="content_dark_last">&nbsp;</td><td class="content_dark_last">%IMAGENUMBER%</td><td>&nbsp;&nbsp;&nbsp;</td><td class="header_last">Focal&nbsp;Length:</td><td class="content_bright_last">&nbsp;</td><td class="content_bright_last">%FOCAL%</td></tr></table>';
 		$this->user_html_exif_OFF="<table width=\"%tableWidth%\" border=\"0\" cellspacing=\"0\" cellpadding=\"0\" class=\"exif\"><tr valign=\"middle\"><td class=\"content_bright_last_center\">no EXIF found</td></tr></table>";
 		$this->user_max_horizontal_pic=500;
 		$this->user_max_vertical_pic=375;
@@ -123,7 +119,7 @@ class WpExZo {
 		$this->title="TITLE";
 		$this->GO=0;
 		$this->zoom=1;
-		$this->token=array('APERTURE_VALUE','ARTIST','BATTERY_LEVEL','BITS_PER_SAMPLE','BRIGHTNESS_VALUE','CFA_PATTERN','CFA_REPEAT_PATTERN_DIM','COLOR_SPACE','COMPONENTS_CONFIGURATION','COMPRESSED_BITS_PER_PIXEL','COMPRESSION','CONTRAST','COPYRIGHT','CUSTOM_RENDERED','DATE_TIME','DATE_TIME_DIGITIZED','DATE_TIME_ORIGINAL','DEVICE_SETTING_DESCRIPTION','DIGITAL_ZOOM_RATIO','DOCUMENT_NAME','EXIF_IFD_POINTER','EXIF_VERSION','EXPOSURE_BIAS_VALUE','EXPOSURE_INDEX','EXPOSURE_MODE','EXPOSURE_PROGRAM','EXPOSURE_TIME','FILE_SOURCE','FILL_ORDER','FLASH','FLASH_ENERGY','FLASH_PIX_VERSION','FNUMBER','FOCAL_LENGTH','FOCAL_LENGTH_IN_35MM_FILM','FOCAL_PLANE_RESOLUTION_UNIT','FOCAL_PLANE_X_RESOLUTION','FOCAL_PLANE_Y_RESOLUTION','GAIN_CONTROL','GAMMA','GPS_ALTITUDE','GPS_ALTITUDE_REF','GPS_AREA_INFORMATION','GPS_DATE_STAMP','GPS_DEST_BEARING','GPS_DEST_BEARING_REF','GPS_DEST_DISTANCE','GPS_DEST_DISTANCE_REF','GPS_DEST_LATITUDE','GPS_DEST_LATITUDE_REF','GPS_DEST_LONGITUDE','GPS_DEST_LONGITUDE_REF','GPS_DIFFERENTIAL','GPS_DOP','GPS_IMG_DIRECTION','GPS_IMG_DIRECTION_REF','GPS_INFO_IFD_POINTER','GPS_LATITUDE','GPS_LATITUDE_REF','GPS_LONGITUDE','GPS_LONGITUDE_REF','GPS_MAP_DATUM','GPS_MEASURE_MODE','GPS_PROCESSING_METHOD','GPS_SATELLITES','GPS_SPEED','GPS_SPEED_REF','GPS_STATUS','GPS_TIME_STAMP','GPS_TRACK','GPS_TRACK_REF','GPS_VERSION_ID','IMAGE_DESCRIPTION','IMAGE_LENGTH','IMAGE_UNIQUE_ID','IMAGE_WIDTH','INTEROPERABILITY_IFD_POINTER','INTEROPERABILITY_INDEX','INTEROPERABILITY_VERSION','INTER_COLOR_PROFILE','IPTC_NAA','ISO_SPEED_RATINGS','JPEG_INTERCHANGE_FORMAT','JPEG_INTERCHANGE_FORMAT_LENGTH','JPEG_PROC','LIGHT_SOURCE','MAKE','MAKER_NOTE','MAX_APERTURE_VALUE','METERING_MODE','MODEL','OECF','ORIENTATION','PHOTOMETRIC_INTERPRETATION','PIXEL_X_DIMENSION','PIXEL_Y_DIMENSION','PLANAR_CONFIGURATION','PRIMARY_CHROMATICITIES','PRINT_IM','REFERENCE_BLACK_WHITE','RELATED_IMAGE_FILE_FORMAT','RELATED_IMAGE_LENGTH','RELATED_IMAGE_WIDTH','RELATED_SOUND_FILE','RESOLUTION_UNIT','ROWS_PER_STRIP','SAMPLES_PER_PIXEL','SATURATION','SCENE_CAPTURE_TYPE','SCENE_TYPE','SENSING_METHOD','SHARPNESS','SHUTTER_SPEED_VALUE','SOFTWARE','SPATIAL_FREQUENCY_RESPONSE','SPECTRAL_SENSITIVITY','STRIP_BYTE_COUNTS','STRIP_OFFSETS','SUBJECT_AREA','SUBJECT_DISTANCE','SUBJECT_DISTANCE_RANGE','SUBJECT_LOCATION','SUB_SEC_TIME','SUB_SEC_TIME_DIGITIZED','SUB_SEC_TIME_ORIGINAL','TRANSFER_FUNCTION','TRANSFER_RANGE','USER_COMMENT','WHITE_BALANCE','WHITE_POINT','XP_AUTHOR','XP_COMMENT','XP_KEYWORDS','XP_SUBJECT','XP_TITLE','X_RESOLUTION','YCBCR_COEFFICIENTS','YCBCR_POSITIONING','YCBCR_SUB_SAMPLING','Y_RESOLUTION','FOCAL','SHUTTER','APERTURE','ISO','DATETIME','IMAGENUMBER');
+		$this->token=array('APERTURE_VALUE','ARTIST','BATTERY_LEVEL','BITS_PER_SAMPLE','BRIGHTNESS_VALUE','CFA_PATTERN','CFA_REPEAT_PATTERN_DIM','COLOR_SPACE','COMPONENTS_CONFIGURATION','COMPRESSED_BITS_PER_PIXEL','COMPRESSION','CONTRAST','COPYRIGHT','CUSTOM_RENDERED','DATE_TIME','DATE_TIME_DIGITIZED','DATE_TIME_ORIGINAL','DEVICE_SETTING_DESCRIPTION','DIGITAL_ZOOM_RATIO','DOCUMENT_NAME','EXIF_IFD_POINTER','EXIF_VERSION','EXPOSURE_BIAS_VALUE','EXPOSURE_INDEX','EXPOSURE_MODE','EXPOSURE_PROGRAM','EXPOSURE_TIME','FILE_SOURCE','FILL_ORDER','FLASH','FLASH_ENERGY','FLASH_PIX_VERSION','FNUMBER','FOCAL_LENGTH','FOCAL_LENGTH_IN_35MM_FILM','FOCAL_PLANE_RESOLUTION_UNIT','FOCAL_PLANE_X_RESOLUTION','FOCAL_PLANE_Y_RESOLUTION','GAIN_CONTROL','GAMMA','GPS_ALTITUDE','GPS_ALTITUDE_REF','GPS_AREA_INFORMATION','GPS_DATE_STAMP','GPS_DEST_BEARING','GPS_DEST_BEARING_REF','GPS_DEST_DISTANCE','GPS_DEST_DISTANCE_REF','GPS_DEST_LATITUDE','GPS_DEST_LATITUDE_REF','GPS_DEST_LONGITUDE','GPS_DEST_LONGITUDE_REF','GPS_DIFFERENTIAL','GPS_DOP','GPS_IMG_DIRECTION','GPS_IMG_DIRECTION_REF','GPS_INFO_IFD_POINTER','GPS_LATITUDE','GPS_LATITUDE_DEG','GPS_LATITUDE_MIN','GPS_LATITUDE_SEC','GPS_LATITUDE_LONG','GPS_COMBINED','GPS_LATITUDE_SHORT','GPS_LATITUDE_DE','GPS_LATITUDE_REF','GPS_LONGITUDE','GPS_LONGITUDE_DEG','GPS_LONGITUDE_MIN','GPS_LONGITUDE_SEC','GPS_LONGITUDE_DE','GPS_LONGITUDE_LONG','GPS_LONGITUDE_SHORT','GPS_LONGITUDE_REF','GPS_MAP_DATUM','GPS_MEASURE_MODE','GPS_PROCESSING_METHOD','GPS_SATELLITES','GPS_SPEED','GPS_SPEED_REF','GPS_STATUS','GPS_TIME_STAMP','GPS_TRACK','GPS_TRACK_REF','GPS_VERSION_ID','IMAGE_DESCRIPTION','IMAGE_LENGTH','IMAGE_UNIQUE_ID','IMAGE_WIDTH','INTEROPERABILITY_IFD_POINTER','INTEROPERABILITY_INDEX','INTEROPERABILITY_VERSION','INTER_COLOR_PROFILE','IPTC_NAA','ISO_SPEED_RATINGS','JPEG_INTERCHANGE_FORMAT','JPEG_INTERCHANGE_FORMAT_LENGTH','JPEG_PROC','LIGHT_SOURCE','MAKE','MAKER_NOTE','MAX_APERTURE_VALUE','METERING_MODE','MODEL','OECF','ORIENTATION','PHOTOMETRIC_INTERPRETATION','PIXEL_X_DIMENSION','PIXEL_Y_DIMENSION','PLANAR_CONFIGURATION','PRIMARY_CHROMATICITIES','PRINT_IM','REFERENCE_BLACK_WHITE','RELATED_IMAGE_FILE_FORMAT','RELATED_IMAGE_LENGTH','RELATED_IMAGE_WIDTH','RELATED_SOUND_FILE','RESOLUTION_UNIT','ROWS_PER_STRIP','SAMPLES_PER_PIXEL','SATURATION','SCENE_CAPTURE_TYPE','SCENE_TYPE','SENSING_METHOD','SHARPNESS','SHUTTER_SPEED_VALUE','SOFTWARE','SPATIAL_FREQUENCY_RESPONSE','SPECTRAL_SENSITIVITY','STRIP_BYTE_COUNTS','STRIP_OFFSETS','SUBJECT_AREA','SUBJECT_DISTANCE','SUBJECT_DISTANCE_RANGE','SUBJECT_LOCATION','SUB_SEC_TIME','SUB_SEC_TIME_DIGITIZED','SUB_SEC_TIME_ORIGINAL','TRANSFER_FUNCTION','TRANSFER_RANGE','USER_COMMENT','WHITE_BALANCE','WHITE_POINT','XP_AUTHOR','XP_COMMENT','XP_KEYWORDS','XP_SUBJECT','XP_TITLE','X_RESOLUTION','YCBCR_COEFFICIENTS','YCBCR_POSITIONING','YCBCR_SUB_SAMPLING','Y_RESOLUTION','FOCAL','SHUTTER','APERTURE','ISO','DATETIME','IMAGENUMBER');
 #		$this->token=array('COMPRESSION','PHOTOMETRIC_INTERPRETATION','MODEL','MAKE','ORIENTATION','X_RESOLUTION','Y_RESOLUTION','RESOLUTION_UNIT','SOFTWARE','ARTIST','COPYRIGHT','SHUTTER','FNUMBER','EXPOSURE_PROGRAM','ISO','DATE_TIME_ORIGINAL','DATE_TIME_DIGITIZED','SHUTTER_SPEED_VALUE','APERTURE','EXPOSURE_BIAS_VALUE','MAX_APERTURE_VALUE','METERING_MODE','LIGHT_SOURCE','FLASH','FOCAL','COLOR_SPACE','PIXEL_X_DIMENSION','PIXEL_Y_DIMENSION','SENSING_METHOD','SCENE_TYPE','EXPOSURE_MODE','WHITE_BALANCE','DIGITAL_ZOOM_RATIO','FOCAL_LENGTH_IN_35MM_FILM','SCENE_CAPTURE_TYPE','GAIN_CONTROL','CONTRAST','SATURATION','SHARPNESS','SUBJECT_DISTANCE_RANGE','DATETIME','CAM','LENS','IMAGENUMBER');
 		$this->token_hidden=array('Make','Model','ImageWidth','ImageLength','SamplesPerPixel','PhotometricInterpretation','XResolution','YResolution','ResolutionUnit','Compression','PlanarConfiguration','Orientation','ExposureTime','ShutterSpeedValue','FNumber','ApertureValue','ExposureProgram','DateTimeOriginal','DateTimeDigitized','ExposureBiasValue','MaxApertureValue','MeteringMode','LightSource','Fired','Return','Mode','Function','RedEyeMode','FocalLength','SensingMethod','FileSource','SceneType','FocalLengthIn35mmFilm','CustomRendered','ExposureMode','WhiteBalance','SceneCaptureType','GainControl','Contrast','Saturation','Sharpness','SubjectDistanceRange','DigitalZoomRatio','PixelXDimension','PixelYDimension','ColorSpace','ModifyDate','CreatorTool','Rating','CreateDate','MetadataDate','LensInfo','Lens','ImageNumber','format','ColorMode','ICCProfile','History');
 	}
@@ -241,6 +237,7 @@ class WpExZo {
 			$this->zoom=1;
 			$jpeg_noexif = ImageCreateFromJpeg($img_path_smal);
 		}
+		
 		$jpeg = new PelJpeg($img_path);
 		$this->GO=1;
 		$exif = $jpeg->getExif();										##################
@@ -249,7 +246,7 @@ class WpExZo {
 		if($this->GO && $tiff != NULL)	{$ifd0 = $tiff->getIfd();}		### ERROR MSGS ###
 		else	{$this->GO=0;}											##################
 		if($this->GO && $ifd0 != NULL)	{$exif = $ifd0->getSubIfd(PelIfd::EXIF);}
-		else	{$this->GO=0;}			
+		if($this->GO && $ifd0 != NULL)	{$gps = $ifd0->getSubIfd(PelIfd::GPS);}
 		
 		if($this->GO)	{
 			//////////////////////////////////////////////////////
@@ -436,146 +433,146 @@ class WpExZo {
 			///////////
 			// EXIF	 //
 			///////////
-			if($exif->getEntry(PelTag::APERTURE_VALUE) != NULL) 			$this->EXIF['APERTURE_VALUE'] = $exif->getEntry(PelTag::APERTURE_VALUE)->getText();
-			if($exif->getEntry(PelTag::ARTIST) != NULL)					 	$this->EXIF['ARTIST'] = $exif->getEntry(PelTag::ARTIST)->getText();
-			if($exif->getEntry(PelTag::BATTERY_LEVEL) != NULL) 				$this->EXIF['BATTERY_LEVEL'] = $exif->getEntry(PelTag::BATTERY_LEVEL)->getText();
-			if($exif->getEntry(PelTag::BITS_PER_SAMPLE) != NULL) 			$this->EXIF['BITS_PER_SAMPLE'] = $exif->getEntry(PelTag::BITS_PER_SAMPLE)->getText();
-			if($exif->getEntry(PelTag::BRIGHTNESS_VALUE) != NULL) 			$this->EXIF['BRIGHTNESS_VALUE'] = $exif->getEntry(PelTag::BRIGHTNESS_VALUE)->getText();
-			if($exif->getEntry(PelTag::CFA_PATTERN) != NULL) 				$this->EXIF['CFA_PATTERN'] = $exif->getEntry(PelTag::CFA_PATTERN)->getText();
-			if($exif->getEntry(PelTag::CFA_REPEAT_PATTERN_DIM) != NULL) 	$this->EXIF['CFA_REPEAT_PATTERN_DIM'] = $exif->getEntry(PelTag::CFA_REPEAT_PATTERN_DIM)->getText();
-			if($exif->getEntry(PelTag::COLOR_SPACE) != NULL) 				$this->EXIF['COLOR_SPACE'] = $exif->getEntry(PelTag::COLOR_SPACE)->getText();
-			if($exif->getEntry(PelTag::COMPONENTS_CONFIGURATION) != NULL) 	$this->EXIF['COMPONENTS_CONFIGURATION'] = $exif->getEntry(PelTag::COMPONENTS_CONFIGURATION)->getText();
-			if($exif->getEntry(PelTag::COMPRESSED_BITS_PER_PIXEL) != NULL) 	$this->EXIF['COMPRESSED_BITS_PER_PIXEL'] = $exif->getEntry(PelTag::COMPRESSED_BITS_PER_PIXEL)->getText();
-			if($exif->getEntry(PelTag::COMPRESSION) != NULL) 				$this->EXIF['COMPRESSION'] = $exif->getEntry(PelTag::COMPRESSION)->getText();
-			if($exif->getEntry(PelTag::CONTRAST) != NULL) 					$this->EXIF['CONTRAST'] = $exif->getEntry(PelTag::CONTRAST)->getText();
-			if($exif->getEntry(PelTag::COPYRIGHT) != NULL) 					$this->EXIF['COPYRIGHT'] = $exif->getEntry(PelTag::COPYRIGHT)->getText();
-			if($exif->getEntry(PelTag::CUSTOM_RENDERED) != NULL) 			$this->EXIF['CUSTOM_RENDERED'] = $exif->getEntry(PelTag::CUSTOM_RENDERED)->getText();
-#			if($exif->getEntry(PelTag::DATE_TIME) != NULL) 					$this->EXIF['DATE_TIME'] = $exif->getEntry(PelTag::DATE_TIME)->getText();
-#			if($exif->getEntry(PelTag::DATE_TIME_DIGITIZED) != NULL) 		$this->EXIF['DATE_TIME_DIGITIZED'] = $exif->getEntry(PelTag::DATE_TIME_DIGITIZED)->getText();
-#			if($exif->getEntry(PelTag::DATE_TIME_ORIGINAL) != NULL) 		$this->EXIF['DATE_TIME_ORIGINAL'] = $exif->getEntry(PelTag::DATE_TIME_ORIGINAL)->getText();
-			if($exif->getEntry(PelTag::DEVICE_SETTING_DESCRIPTION) != NULL) $this->EXIF['DEVICE_SETTING_DESCRIPTION'] = $exif->getEntry(PelTag::DEVICE_SETTING_DESCRIPTION)->getText();
-			if($exif->getEntry(PelTag::DIGITAL_ZOOM_RATIO) != NULL) 		$this->EXIF['DIGITAL_ZOOM_RATIO'] = $exif->getEntry(PelTag::DIGITAL_ZOOM_RATIO)->getText();
-			if($exif->getEntry(PelTag::DOCUMENT_NAME) != NULL) 				$this->EXIF['DOCUMENT_NAME'] = $exif->getEntry(PelTag::DOCUMENT_NAME)->getText();
-			if($exif->getEntry(PelTag::EXIF_IFD_POINTER) != NULL) 			$this->EXIF['EXIF_IFD_POINTER'] = $exif->getEntry(PelTag::EXIF_IFD_POINTER)->getText();
-			if($exif->getEntry(PelTag::EXIF_VERSION) != NULL) 				$this->EXIF['EXIF_VERSION'] = $exif->getEntry(PelTag::EXIF_VERSION)->getText();
-			if($exif->getEntry(PelTag::EXPOSURE_BIAS_VALUE) != NULL) 		$this->EXIF['EXPOSURE_BIAS_VALUE'] = $exif->getEntry(PelTag::EXPOSURE_BIAS_VALUE)->getText();
-			if($exif->getEntry(PelTag::EXPOSURE_INDEX) != NULL) 			$this->EXIF['EXPOSURE_INDEX'] = $exif->getEntry(PelTag::EXPOSURE_INDEX)->getText();
-			if($exif->getEntry(PelTag::EXPOSURE_MODE) != NULL) 				$this->EXIF['EXPOSURE_MODE'] = $exif->getEntry(PelTag::EXPOSURE_MODE)->getText();
-			if($exif->getEntry(PelTag::EXPOSURE_PROGRAM) != NULL) 			$this->EXIF['EXPOSURE_PROGRAM'] = $exif->getEntry(PelTag::EXPOSURE_PROGRAM)->getText();
-			if($exif->getEntry(PelTag::EXPOSURE_TIME) != NULL) 				$this->EXIF['EXPOSURE_TIME'] = $exif->getEntry(PelTag::EXPOSURE_TIME)->getText();
-			if($exif->getEntry(PelTag::FILE_SOURCE) != NULL) 				$this->EXIF['FILE_SOURCE'] = $exif->getEntry(PelTag::FILE_SOURCE)->getText();
-			if($exif->getEntry(PelTag::FILL_ORDER) != NULL) 				$this->EXIF['FILL_ORDER'] = $exif->getEntry(PelTag::FILL_ORDER)->getText();
-			if($exif->getEntry(PelTag::FLASH) != NULL) 						$this->EXIF['FLASH'] = $exif->getEntry(PelTag::FLASH)->getText();
-			if($exif->getEntry(PelTag::FLASH_ENERGY) != NULL) 				$this->EXIF['FLASH_ENERGY'] = $exif->getEntry(PelTag::FLASH_ENERGY)->getText();
-			if($exif->getEntry(PelTag::FLASH_PIX_VERSION) != NULL) 			$this->EXIF['FLASH_PIX_VERSION'] = $exif->getEntry(PelTag::FLASH_PIX_VERSION)->getText();
-			if($exif->getEntry(PelTag::FNUMBER) != NULL) 					$this->EXIF['FNUMBER'] = $exif->getEntry(PelTag::FNUMBER)->getText();
-			if($exif->getEntry(PelTag::FOCAL_LENGTH) != NULL)			 	$this->EXIF['FOCAL_LENGTH'] = $exif->getEntry(PelTag::FOCAL_LENGTH)->getText();
-			if($exif->getEntry(PelTag::FOCAL_LENGTH_IN_35MM_FILM) != NULL) 	$this->EXIF['FOCAL_LENGTH_IN_35MM_FILM'] = $exif->getEntry(PelTag::FOCAL_LENGTH_IN_35MM_FILM)->getText();
-			if($exif->getEntry(PelTag::FOCAL_PLANE_RESOLUTION_UNIT) != NULL) 	$this->EXIF['FOCAL_PLANE_RESOLUTION_UNIT'] = $exif->getEntry(PelTag::FOCAL_PLANE_RESOLUTION_UNIT)->getText();
-			if($exif->getEntry(PelTag::FOCAL_PLANE_X_RESOLUTION) != NULL) 	$this->EXIF['FOCAL_PLANE_X_RESOLUTION'] = $exif->getEntry(PelTag::FOCAL_PLANE_X_RESOLUTION)->getText();
-			if($exif->getEntry(PelTag::FOCAL_PLANE_Y_RESOLUTION) != NULL) 	$this->EXIF['FOCAL_PLANE_Y_RESOLUTION'] = $exif->getEntry(PelTag::FOCAL_PLANE_Y_RESOLUTION)->getText();
-			if($exif->getEntry(PelTag::GAIN_CONTROL) != NULL) 				$this->EXIF['GAIN_CONTROL'] = $exif->getEntry(PelTag::GAIN_CONTROL)->getText();
-			if($exif->getEntry(PelTag::GAMMA) != NULL) 						$this->EXIF['GAMMA'] = $exif->getEntry(PelTag::GAMMA)->getText();
-			if($exif->getEntry(PelTag::GPS_ALTITUDE) != NULL) 				$this->EXIF['GPS_ALTITUDE'] = $exif->getEntry(PelTag::GPS_ALTITUDE)->getText();
-			if($exif->getEntry(PelTag::GPS_ALTITUDE_REF) != NULL) 			$this->EXIF['GPS_ALTITUDE_REF'] = $exif->getEntry(PelTag::GPS_ALTITUDE_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_AREA_INFORMATION) != NULL) 		$this->EXIF['GPS_AREA_INFORMATION'] = $exif->getEntry(PelTag::GPS_AREA_INFORMATION)->getText();
-			if($exif->getEntry(PelTag::GPS_DATE_STAMP) != NULL) 			$this->EXIF['GPS_DATE_STAMP'] = $exif->getEntry(PelTag::GPS_DATE_STAMP)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_BEARING) != NULL) 			$this->EXIF['GPS_DEST_BEARING'] = $exif->getEntry(PelTag::GPS_DEST_BEARING)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_BEARING_REF) != NULL) 		$this->EXIF['GPS_DEST_BEARING_REF'] = $exif->getEntry(PelTag::GPS_DEST_BEARING_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_DISTANCE) != NULL) 			$this->EXIF['GPS_DEST_DISTANCE'] = $exif->getEntry(PelTag::GPS_DEST_DISTANCE)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_DISTANCE_REF) != NULL) 		$this->EXIF['GPS_DEST_DISTANCE_REF'] = $exif->getEntry(PelTag::GPS_DEST_DISTANCE_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_LATITUDE) != NULL) 			$this->EXIF['GPS_DEST_LATITUDE'] = $exif->getEntry(PelTag::GPS_DEST_LATITUDE)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_LATITUDE_REF) != NULL) 		$this->EXIF['GPS_DEST_LATITUDE_REF'] = $exif->getEntry(PelTag::GPS_DEST_LATITUDE_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_LONGITUDE) != NULL) 		$this->EXIF['GPS_DEST_LONGITUDE'] = $exif->getEntry(PelTag::GPS_DEST_LONGITUDE)->getText();
-			if($exif->getEntry(PelTag::GPS_DEST_LONGITUDE_REF) != NULL) 	$this->EXIF['GPS_DEST_LONGITUDE_REF'] = $exif->getEntry(PelTag::GPS_DEST_LONGITUDE_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_DIFFERENTIAL) != NULL) 			$this->EXIF['GPS_DIFFERENTIAL'] = $exif->getEntry(PelTag::GPS_DIFFERENTIAL)->getText();
-			if($exif->getEntry(PelTag::GPS_DOP) != NULL) 					$this->EXIF['GPS_DOP'] = $exif->getEntry(PelTag::GPS_DOP)->getText();
-			if($exif->getEntry(PelTag::GPS_IMG_DIRECTION) != NULL) 			$this->EXIF['GPS_IMG_DIRECTION'] = $exif->getEntry(PelTag::GPS_IMG_DIRECTION)->getText();
-			if($exif->getEntry(PelTag::GPS_IMG_DIRECTION_REF) != NULL) 		$this->EXIF['GPS_IMG_DIRECTION_REF'] = $exif->getEntry(PelTag::GPS_IMG_DIRECTION_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_INFO_IFD_POINTER) != NULL) 		$this->EXIF['GPS_INFO_IFD_POINTER'] = $exif->getEntry(PelTag::GPS_INFO_IFD_POINTER)->getText();
-			if($exif->getEntry(PelTag::GPS_LATITUDE) != NULL) 				$this->EXIF['GPS_LATITUDE'] = $exif->getEntry(PelTag::GPS_LATITUDE)->getText();
-			if($exif->getEntry(PelTag::GPS_LATITUDE_REF) != NULL) 			$this->EXIF['GPS_LATITUDE_REF'] = $exif->getEntry(PelTag::GPS_LATITUDE_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_LONGITUDE) != NULL) 				$this->EXIF['GPS_LONGITUDE'] = $exif->getEntry(PelTag::GPS_LONGITUDE)->getText();
-			if($exif->getEntry(PelTag::GPS_LONGITUDE_REF) != NULL) 			$this->EXIF['GPS_LONGITUDE_REF'] = $exif->getEntry(PelTag::GPS_LONGITUDE_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_MAP_DATUM) != NULL) 				$this->EXIF['GPS_MAP_DATUM'] = $exif->getEntry(PelTag::GPS_MAP_DATUM)->getText();
-			if($exif->getEntry(PelTag::GPS_MEASURE_MODE) != NULL) 			$this->EXIF['GPS_MEASURE_MODE'] = $exif->getEntry(PelTag::GPS_MEASURE_MODE)->getText();
-			if($exif->getEntry(PelTag::GPS_PROCESSING_METHOD) != NULL) 		$this->EXIF['GPS_PROCESSING_METHOD'] = $exif->getEntry(PelTag::GPS_PROCESSING_METHOD)->getText();
-			if($exif->getEntry(PelTag::GPS_SATELLITES) != NULL) 			$this->EXIF['GPS_SATELLITES'] = $exif->getEntry(PelTag::GPS_SATELLITES)->getText();
-			if($exif->getEntry(PelTag::GPS_SPEED) != NULL) 					$this->EXIF['GPS_SPEED'] = $exif->getEntry(PelTag::GPS_SPEED)->getText();
-			if($exif->getEntry(PelTag::GPS_SPEED_REF) != NULL) 				$this->EXIF['GPS_SPEED_REF'] = $exif->getEntry(PelTag::GPS_SPEED_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_STATUS) != NULL) 				$this->EXIF['GPS_STATUS'] = $exif->getEntry(PelTag::GPS_STATUS)->getText();
-			if($exif->getEntry(PelTag::GPS_TIME_STAMP) != NULL) 			$this->EXIF['GPS_TIME_STAMP'] = $exif->getEntry(PelTag::GPS_TIME_STAMP)->getText();
-			if($exif->getEntry(PelTag::GPS_TRACK) != NULL) 					$this->EXIF['GPS_TRACK'] = $exif->getEntry(PelTag::GPS_TRACK)->getText();
-			if($exif->getEntry(PelTag::GPS_TRACK_REF) != NULL) 				$this->EXIF['GPS_TRACK_REF'] = $exif->getEntry(PelTag::GPS_TRACK_REF)->getText();
-			if($exif->getEntry(PelTag::GPS_VERSION_ID) != NULL) 			$this->EXIF['GPS_VERSION_ID'] = $exif->getEntry(PelTag::GPS_VERSION_ID)->getText();
-			if($exif->getEntry(PelTag::IMAGE_DESCRIPTION) != NULL) 			$this->EXIF['IMAGE_DESCRIPTION'] = $exif->getEntry(PelTag::IMAGE_DESCRIPTION)->getText();
-			if($exif->getEntry(PelTag::IMAGE_LENGTH) != NULL) 				$this->EXIF['IMAGE_LENGTH'] = $exif->getEntry(PelTag::IMAGE_LENGTH)->getText();
-			if($exif->getEntry(PelTag::IMAGE_UNIQUE_ID) != NULL) 			$this->EXIF['IMAGE_UNIQUE_ID'] = $exif->getEntry(PelTag::IMAGE_UNIQUE_ID)->getText();
-			if($exif->getEntry(PelTag::IMAGE_WIDTH) != NULL) 				$this->EXIF['IMAGE_WIDTH'] = $exif->getEntry(PelTag::IMAGE_WIDTH)->getText();
-			if($exif->getEntry(PelTag::INTEROPERABILITY_IFD_POINTER) != NULL) 	$this->EXIF['INTEROPERABILITY_IFD_POINTER'] = $exif->getEntry(PelTag::INTEROPERABILITY_IFD_POINTER)->getText();
-			if($exif->getEntry(PelTag::INTEROPERABILITY_INDEX) != NULL) 	$this->EXIF['INTEROPERABILITY_INDEX'] = $exif->getEntry(PelTag::INTEROPERABILITY_INDEX)->getText();
-			if($exif->getEntry(PelTag::INTEROPERABILITY_VERSION) != NULL)	$this->EXIF['INTEROPERABILITY_VERSION'] = $exif->getEntry(PelTag::INTEROPERABILITY_VERSION)->getText();
-			if($exif->getEntry(PelTag::INTER_COLOR_PROFILE) != NULL) 		$this->EXIF['INTER_COLOR_PROFILE'] = $exif->getEntry(PelTag::INTER_COLOR_PROFILE)->getText();
-			if($exif->getEntry(PelTag::IPTC_NAA) != NULL) 					$this->EXIF['IPTC_NAA'] = $exif->getEntry(PelTag::IPTC_NAA)->getText();
-			if($exif->getEntry(PelTag::ISO_SPEED_RATINGS) != NULL) 			$this->EXIF['ISO_SPEED_RATINGS'] = $exif->getEntry(PelTag::ISO_SPEED_RATINGS)->getText();
-			if($exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT) != NULL) 		$this->EXIF['JPEG_INTERCHANGE_FORMAT'] = $exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT)->getText();
-			if($exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT_LENGTH) != NULL) $this->EXIF['JPEG_INTERCHANGE_FORMAT_LENGTH'] = $exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT_LENGTH)->getText();
-			if($exif->getEntry(PelTag::JPEG_PROC) != NULL) 					$this->EXIF['JPEG_PROC'] = $exif->getEntry(PelTag::JPEG_PROC)->getText();
-			if($exif->getEntry(PelTag::LIGHT_SOURCE) != NULL) 				$this->EXIF['LIGHT_SOURCE'] = $exif->getEntry(PelTag::LIGHT_SOURCE)->getText();
-			if($exif->getEntry(PelTag::MAKE) != NULL)						$this->EXIF['MAKE'] = $exif->getEntry(PelTag::MAKE)->getText();
-			if($exif->getEntry(PelTag::MAKER_NOTE) != NULL) 				$this->EXIF['MAKER_NOTE'] = $exif->getEntry(PelTag::MAKER_NOTE)->getText();
-			if($exif->getEntry(PelTag::MAX_APERTURE_VALUE) != NULL) 		$this->EXIF['MAX_APERTURE_VALUE'] = $exif->getEntry(PelTag::MAX_APERTURE_VALUE)->getText();
-			if($exif->getEntry(PelTag::METERING_MODE) != NULL) 				$this->EXIF['METERING_MODE'] = $exif->getEntry(PelTag::METERING_MODE)->getText();
-			if($exif->getEntry(PelTag::MODEL) != NULL) 						$this->EXIF['MODEL'] = $exif->getEntry(PelTag::MODEL)->getText();
-			if($exif->getEntry(PelTag::OECF) != NULL) 						$this->EXIF['OECF'] = $exif->getEntry(PelTag::OECF)->getText();
-			if($exif->getEntry(PelTag::ORIENTATION) != NULL) 				$this->EXIF['ORIENTATION'] = $exif->getEntry(PelTag::ORIENTATION)->getText();
-			if($exif->getEntry(PelTag::PHOTOMETRIC_INTERPRETATION) != NULL) $this->EXIF['PHOTOMETRIC_INTERPRETATION'] = $exif->getEntry(PelTag::PHOTOMETRIC_INTERPRETATION)->getText();
-			if($exif->getEntry(PelTag::PIXEL_X_DIMENSION) != NULL) 			$this->EXIF['PIXEL_X_DIMENSION'] = $exif->getEntry(PelTag::PIXEL_X_DIMENSION)->getText();
-			if($exif->getEntry(PelTag::PIXEL_Y_DIMENSION) != NULL) 			$this->EXIF['PIXEL_Y_DIMENSION'] = $exif->getEntry(PelTag::PIXEL_Y_DIMENSION)->getText();
-			if($exif->getEntry(PelTag::PLANAR_CONFIGURATION) != NULL) 		$this->EXIF['PLANAR_CONFIGURATION'] = $exif->getEntry(PelTag::PLANAR_CONFIGURATION)->getText();
-			if($exif->getEntry(PelTag::PRIMARY_CHROMATICITIES) != NULL) 	$this->EXIF['PRIMARY_CHROMATICITIES'] = $exif->getEntry(PelTag::PRIMARY_CHROMATICITIES)->getText();
-			if($exif->getEntry(PelTag::PRINT_IM) != NULL) 					$this->EXIF['PRINT_IM'] = $exif->getEntry(PelTag::PRINT_IM)->getText();
-			if($exif->getEntry(PelTag::REFERENCE_BLACK_WHITE) != NULL) 		$this->EXIF['REFERENCE_BLACK_WHITE'] = $exif->getEntry(PelTag::REFERENCE_BLACK_WHITE)->getText();
-			if($exif->getEntry(PelTag::RELATED_IMAGE_FILE_FORMAT) != NULL) 	$this->EXIF['RELATED_IMAGE_FILE_FORMAT'] = $exif->getEntry(PelTag::RELATED_IMAGE_FILE_FORMAT)->getText();
-			if($exif->getEntry(PelTag::RELATED_IMAGE_LENGTH) != NULL) 		$this->EXIF['RELATED_IMAGE_LENGTH'] = $exif->getEntry(PelTag::RELATED_IMAGE_LENGTH)->getText();
-			if($exif->getEntry(PelTag::RELATED_IMAGE_WIDTH) != NULL) 		$this->EXIF['RELATED_IMAGE_WIDTH'] = $exif->getEntry(PelTag::RELATED_IMAGE_WIDTH)->getText();
-			if($exif->getEntry(PelTag::RELATED_SOUND_FILE) != NULL) 		$this->EXIF['RELATED_SOUND_FILE'] = $exif->getEntry(PelTag::RELATED_SOUND_FILE)->getText();
-			if($exif->getEntry(PelTag::RESOLUTION_UNIT) != NULL) 			$this->EXIF['RESOLUTION_UNIT'] = $exif->getEntry(PelTag::RESOLUTION_UNIT)->getText();
-			if($exif->getEntry(PelTag::ROWS_PER_STRIP) != NULL) 			$this->EXIF['ROWS_PER_STRIP'] = $exif->getEntry(PelTag::ROWS_PER_STRIP)->getText();
-			if($exif->getEntry(PelTag::SAMPLES_PER_PIXEL) != NULL) 			$this->EXIF['SAMPLES_PER_PIXEL'] = $exif->getEntry(PelTag::SAMPLES_PER_PIXEL)->getText();
-			if($exif->getEntry(PelTag::SATURATION) != NULL) 				$this->EXIF['SATURATION'] = $exif->getEntry(PelTag::SATURATION)->getText();
-			if($exif->getEntry(PelTag::SCENE_CAPTURE_TYPE) != NULL) 		$this->EXIF['SCENE_CAPTURE_TYPE'] = $exif->getEntry(PelTag::SCENE_CAPTURE_TYPE)->getText();
-			if($exif->getEntry(PelTag::SCENE_TYPE) != NULL) 				$this->EXIF['SCENE_TYPE'] = $exif->getEntry(PelTag::SCENE_TYPE)->getText();
-			if($exif->getEntry(PelTag::SENSING_METHOD) != NULL) 			$this->EXIF['SENSING_METHOD'] = $exif->getEntry(PelTag::SENSING_METHOD)->getText();
-			if($exif->getEntry(PelTag::SHARPNESS) != NULL) 					$this->EXIF['SHARPNESS'] = $exif->getEntry(PelTag::SHARPNESS)->getText();
-			if($exif->getEntry(PelTag::SHUTTER_SPEED_VALUE) != NULL) 		$this->EXIF['SHUTTER_SPEED_VALUE'] = $exif->getEntry(PelTag::SHUTTER_SPEED_VALUE)->getText();
-			if($exif->getEntry(PelTag::SOFTWARE) != NULL) 					$this->EXIF['SOFTWARE'] = $exif->getEntry(PelTag::SOFTWARE)->getText();
-			if($exif->getEntry(PelTag::SPATIAL_FREQUENCY_RESPONSE) != NULL) $this->EXIF['SPATIAL_FREQUENCY_RESPONSE'] = $exif->getEntry(PelTag::SPATIAL_FREQUENCY_RESPONSE)->getText();
-			if($exif->getEntry(PelTag::SPECTRAL_SENSITIVITY) != NULL) 		$this->EXIF['SPECTRAL_SENSITIVITY'] = $exif->getEntry(PelTag::SPECTRAL_SENSITIVITY)->getText();
-			if($exif->getEntry(PelTag::STRIP_BYTE_COUNTS) != NULL) 			$this->EXIF['STRIP_BYTE_COUNTS'] = $exif->getEntry(PelTag::STRIP_BYTE_COUNTS)->getText();
-			if($exif->getEntry(PelTag::STRIP_OFFSETS) != NULL) 				$this->EXIF['STRIP_OFFSETS'] = $exif->getEntry(PelTag::STRIP_OFFSETS)->getText();
-			if($exif->getEntry(PelTag::SUBJECT_AREA) != NULL) 				$this->EXIF['SUBJECT_AREA'] = $exif->getEntry(PelTag::SUBJECT_AREA)->getText();
-			if($exif->getEntry(PelTag::SUBJECT_DISTANCE) != NULL) 			$this->EXIF['SUBJECT_DISTANCE'] = $exif->getEntry(PelTag::SUBJECT_DISTANCE)->getText();
-			if($exif->getEntry(PelTag::SUBJECT_DISTANCE_RANGE) != NULL) 	$this->EXIF['SUBJECT_DISTANCE_RANGE'] = $exif->getEntry(PelTag::SUBJECT_DISTANCE_RANGE)->getText();
-			if($exif->getEntry(PelTag::SUBJECT_LOCATION) != NULL) 			$this->EXIF['SUBJECT_LOCATION'] = $exif->getEntry(PelTag::SUBJECT_LOCATION)->getText();
-			if($exif->getEntry(PelTag::SUB_SEC_TIME) != NULL) 				$this->EXIF['SUB_SEC_TIME'] = $exif->getEntry(PelTag::SUB_SEC_TIME)->getText();
-			if($exif->getEntry(PelTag::SUB_SEC_TIME_DIGITIZED) != NULL) 	$this->EXIF['SUB_SEC_TIME_DIGITIZED'] = $exif->getEntry(PelTag::SUB_SEC_TIME_DIGITIZED)->getText();
-			if($exif->getEntry(PelTag::SUB_SEC_TIME_ORIGINAL) != NULL) 		$this->EXIF['SUB_SEC_TIME_ORIGINAL'] = $exif->getEntry(PelTag::SUB_SEC_TIME_ORIGINAL)->getText();
-			if($exif->getEntry(PelTag::TRANSFER_FUNCTION) != NULL) 			$this->EXIF['TRANSFER_FUNCTION'] = $exif->getEntry(PelTag::TRANSFER_FUNCTION)->getText();
-			if($exif->getEntry(PelTag::TRANSFER_RANGE) != NULL) 			$this->EXIF['TRANSFER_RANGE'] = $exif->getEntry(PelTag::TRANSFER_RANGE)->getText();
-			if($exif->getEntry(PelTag::USER_COMMENT) != NULL) 				$this->EXIF['USER_COMMENT'] = $exif->getEntry(PelTag::USER_COMMENT)->getText();
-			if($exif->getEntry(PelTag::WHITE_BALANCE) != NULL) 				$this->EXIF['WHITE_BALANCE'] = $exif->getEntry(PelTag::WHITE_BALANCE)->getText();
-			if($exif->getEntry(PelTag::WHITE_POINT) != NULL) 				$this->EXIF['WHITE_POINT'] = $exif->getEntry(PelTag::WHITE_POINT)->getText();
-			if($exif->getEntry(PelTag::XP_AUTHOR) != NULL) 					$this->EXIF['XP_AUTHOR'] = $exif->getEntry(PelTag::XP_AUTHOR)->getText();
-			if($exif->getEntry(PelTag::XP_COMMENT) != NULL) 				$this->EXIF['XP_COMMENT'] = $exif->getEntry(PelTag::XP_COMMENT)->getText();
-			if($exif->getEntry(PelTag::XP_KEYWORDS) != NULL) 				$this->EXIF['XP_KEYWORDS'] = $exif->getEntry(PelTag::XP_KEYWORDS)->getText();
-			if($exif->getEntry(PelTag::XP_SUBJECT) != NULL) 				$this->EXIF['XP_SUBJECT'] = $exif->getEntry(PelTag::XP_SUBJECT)->getText();
-			if($exif->getEntry(PelTag::XP_TITLE) != NULL) 					$this->EXIF['XP_TITLE'] = $exif->getEntry(PelTag::XP_TITLE)->getText();
-			if($exif->getEntry(PelTag::X_RESOLUTION) != NULL) 				$this->EXIF['X_RESOLUTION'] = $exif->getEntry(PelTag::X_RESOLUTION)->getText();
-			if($exif->getEntry(PelTag::YCBCR_COEFFICIENTS) != NULL)		 	$this->EXIF['YCBCR_COEFFICIENTS'] = $exif->getEntry(PelTag::YCBCR_COEFFICIENTS)->getText();
-			if($exif->getEntry(PelTag::YCBCR_POSITIONING) != NULL) 			$this->EXIF['YCBCR_POSITIONING'] = $exif->getEntry(PelTag::YCBCR_POSITIONING)->getText();
-			if($exif->getEntry(PelTag::YCBCR_SUB_SAMPLING) != NULL) 		$this->EXIF['YCBCR_SUB_SAMPLING'] = $exif->getEntry(PelTag::YCBCR_SUB_SAMPLING)->getText();
-			if($exif->getEntry(PelTag::Y_RESOLUTION) != NULL) 				$this->EXIF['Y_RESOLUTION'] = $exif->getEntry(PelTag::Y_RESOLUTION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::APERTURE_VALUE) != NULL) 				$this->EXIF['APERTURE_VALUE'] = $exif->getEntry(PelTag::APERTURE_VALUE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::ARTIST) != NULL)					 	$this->EXIF['ARTIST'] = $exif->getEntry(PelTag::ARTIST)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::BATTERY_LEVEL) != NULL) 				$this->EXIF['BATTERY_LEVEL'] = $exif->getEntry(PelTag::BATTERY_LEVEL)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::BITS_PER_SAMPLE) != NULL) 			$this->EXIF['BITS_PER_SAMPLE'] = $exif->getEntry(PelTag::BITS_PER_SAMPLE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::BRIGHTNESS_VALUE) != NULL) 			$this->EXIF['BRIGHTNESS_VALUE'] = $exif->getEntry(PelTag::BRIGHTNESS_VALUE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::CFA_PATTERN) != NULL) 				$this->EXIF['CFA_PATTERN'] = $exif->getEntry(PelTag::CFA_PATTERN)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::CFA_REPEAT_PATTERN_DIM) != NULL) 		$this->EXIF['CFA_REPEAT_PATTERN_DIM'] = $exif->getEntry(PelTag::CFA_REPEAT_PATTERN_DIM)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::COLOR_SPACE) != NULL) 				$this->EXIF['COLOR_SPACE'] = $exif->getEntry(PelTag::COLOR_SPACE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::COMPONENTS_CONFIGURATION) != NULL) 	$this->EXIF['COMPONENTS_CONFIGURATION'] = $exif->getEntry(PelTag::COMPONENTS_CONFIGURATION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::COMPRESSED_BITS_PER_PIXEL) != NULL) 	$this->EXIF['COMPRESSED_BITS_PER_PIXEL'] = $exif->getEntry(PelTag::COMPRESSED_BITS_PER_PIXEL)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::COMPRESSION) != NULL) 				$this->EXIF['COMPRESSION'] = $exif->getEntry(PelTag::COMPRESSION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::CONTRAST) != NULL) 					$this->EXIF['CONTRAST'] = $exif->getEntry(PelTag::CONTRAST)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::COPYRIGHT) != NULL) 					$this->EXIF['COPYRIGHT'] = $exif->getEntry(PelTag::COPYRIGHT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::CUSTOM_RENDERED) != NULL) 			$this->EXIF['CUSTOM_RENDERED'] = $exif->getEntry(PelTag::CUSTOM_RENDERED)->getText();
+#			if($exif!=NULL && $exif->getEntry(PelTag::DATE_TIME) != NULL) 					$this->EXIF['DATE_TIME'] = $exif->getEntry(PelTag::DATE_TIME)->getText();
+#			if($exif!=NULL && $exif->getEntry(PelTag::DATE_TIME_DIGITIZED) != NULL) 		$this->EXIF['DATE_TIME_DIGITIZED'] = $exif->getEntry(PelTag::DATE_TIME_DIGITIZED)->getText();
+#			if($exif!=NULL && $exif->getEntry(PelTag::DATE_TIME_ORIGINAL) != NULL) 			$this->EXIF['DATE_TIME_ORIGINAL'] = $exif->getEntry(PelTag::DATE_TIME_ORIGINAL)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::DEVICE_SETTING_DESCRIPTION) != NULL) 	$this->EXIF['DEVICE_SETTING_DESCRIPTION'] = $exif->getEntry(PelTag::DEVICE_SETTING_DESCRIPTION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::DIGITAL_ZOOM_RATIO) != NULL) 			$this->EXIF['DIGITAL_ZOOM_RATIO'] = $exif->getEntry(PelTag::DIGITAL_ZOOM_RATIO)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::DOCUMENT_NAME) != NULL) 				$this->EXIF['DOCUMENT_NAME'] = $exif->getEntry(PelTag::DOCUMENT_NAME)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::EXIF_IFD_POINTER) != NULL) 			$this->EXIF['EXIF_IFD_POINTER'] = $exif->getEntry(PelTag::EXIF_IFD_POINTER)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::EXIF_VERSION) != NULL) 				$this->EXIF['EXIF_VERSION'] = $exif->getEntry(PelTag::EXIF_VERSION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::EXPOSURE_BIAS_VALUE) != NULL) 		$this->EXIF['EXPOSURE_BIAS_VALUE'] = $exif->getEntry(PelTag::EXPOSURE_BIAS_VALUE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::EXPOSURE_INDEX) != NULL) 				$this->EXIF['EXPOSURE_INDEX'] = $exif->getEntry(PelTag::EXPOSURE_INDEX)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::EXPOSURE_MODE) != NULL) 				$this->EXIF['EXPOSURE_MODE'] = $exif->getEntry(PelTag::EXPOSURE_MODE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::EXPOSURE_PROGRAM) != NULL) 			$this->EXIF['EXPOSURE_PROGRAM'] = $exif->getEntry(PelTag::EXPOSURE_PROGRAM)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::EXPOSURE_TIME) != NULL) 				$this->EXIF['EXPOSURE_TIME'] = $exif->getEntry(PelTag::EXPOSURE_TIME)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FILE_SOURCE) != NULL) 				$this->EXIF['FILE_SOURCE'] = $exif->getEntry(PelTag::FILE_SOURCE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FILL_ORDER) != NULL) 					$this->EXIF['FILL_ORDER'] = $exif->getEntry(PelTag::FILL_ORDER)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FLASH) != NULL) 						$this->EXIF['FLASH'] = $exif->getEntry(PelTag::FLASH)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FLASH_ENERGY) != NULL) 				$this->EXIF['FLASH_ENERGY'] = $exif->getEntry(PelTag::FLASH_ENERGY)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FLASH_PIX_VERSION) != NULL) 			$this->EXIF['FLASH_PIX_VERSION'] = $exif->getEntry(PelTag::FLASH_PIX_VERSION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FNUMBER) != NULL) 					$this->EXIF['FNUMBER'] = $exif->getEntry(PelTag::FNUMBER)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FOCAL_LENGTH) != NULL)			 	$this->EXIF['FOCAL_LENGTH'] = $exif->getEntry(PelTag::FOCAL_LENGTH)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FOCAL_LENGTH_IN_35MM_FILM) != NULL) 	$this->EXIF['FOCAL_LENGTH_IN_35MM_FILM'] = $exif->getEntry(PelTag::FOCAL_LENGTH_IN_35MM_FILM)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FOCAL_PLANE_RESOLUTION_UNIT) != NULL) $this->EXIF['FOCAL_PLANE_RESOLUTION_UNIT'] = $exif->getEntry(PelTag::FOCAL_PLANE_RESOLUTION_UNIT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FOCAL_PLANE_X_RESOLUTION) != NULL) 	$this->EXIF['FOCAL_PLANE_X_RESOLUTION'] = $exif->getEntry(PelTag::FOCAL_PLANE_X_RESOLUTION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::FOCAL_PLANE_Y_RESOLUTION) != NULL) 	$this->EXIF['FOCAL_PLANE_Y_RESOLUTION'] = $exif->getEntry(PelTag::FOCAL_PLANE_Y_RESOLUTION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::GAIN_CONTROL) != NULL) 				$this->EXIF['GAIN_CONTROL'] = $exif->getEntry(PelTag::GAIN_CONTROL)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::GAMMA) != NULL) 						$this->EXIF['GAMMA'] = $exif->getEntry(PelTag::GAMMA)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_ALTITUDE) != NULL) 			$this->EXIF['GPS_ALTITUDE'] = $gps->getEntry(PelTag::GPS_ALTITUDE)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_ALTITUDE_REF) != NULL) 		$this->EXIF['GPS_ALTITUDE_REF'] = $gps->getEntry(PelTag::GPS_ALTITUDE_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_AREA_INFORMATION) != NULL)	$this->EXIF['GPS_AREA_INFORMATION'] = $gps->getEntry(PelTag::GPS_AREA_INFORMATION)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DATE_STAMP) != NULL) 		$this->EXIF['GPS_DATE_STAMP'] = $gps->getEntry(PelTag::GPS_DATE_STAMP)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_BEARING) != NULL) 		$this->EXIF['GPS_DEST_BEARING'] = $gps->getEntry(PelTag::GPS_DEST_BEARING)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_BEARING_REF) != NULL)	$this->EXIF['GPS_DEST_BEARING_REF'] = $gps->getEntry(PelTag::GPS_DEST_BEARING_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_DISTANCE) != NULL) 	$this->EXIF['GPS_DEST_DISTANCE'] = $gps->getEntry(PelTag::GPS_DEST_DISTANCE)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_DISTANCE_REF) != NULL)	$this->EXIF['GPS_DEST_DISTANCE_REF'] = $gps->getEntry(PelTag::GPS_DEST_DISTANCE_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_LATITUDE) != NULL) 	$this->EXIF['GPS_DEST_LATITUDE'] = $gps->getEntry(PelTag::GPS_DEST_LATITUDE)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_LATITUDE_REF) != NULL) $this->EXIF['GPS_DEST_LATITUDE_REF'] = $gps->getEntry(PelTag::GPS_DEST_LATITUDE_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_LONGITUDE) != NULL) 	$this->EXIF['GPS_DEST_LONGITUDE'] = $gps->getEntry(PelTag::GPS_DEST_LONGITUDE)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DEST_LONGITUDE_REF) != NULL)$this->EXIF['GPS_DEST_LONGITUDE_REF'] = $gps->getEntry(PelTag::GPS_DEST_LONGITUDE_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DIFFERENTIAL) != NULL) 		$this->EXIF['GPS_DIFFERENTIAL'] = $gps->getEntry(PelTag::GPS_DIFFERENTIAL)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_DOP) != NULL) 				$this->EXIF['GPS_DOP'] = $gps->getEntry(PelTag::GPS_DOP)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_IMG_DIRECTION) != NULL) 	$this->EXIF['GPS_IMG_DIRECTION'] = $gps->getEntry(PelTag::GPS_IMG_DIRECTION)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_IMG_DIRECTION_REF) != NULL) $this->EXIF['GPS_IMG_DIRECTION_REF'] = $gps->getEntry(PelTag::GPS_IMG_DIRECTION_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_INFO_IFD_POINTER) != NULL) 	$this->EXIF['GPS_INFO_IFD_POINTER'] = $gps->getEntry(PelTag::GPS_INFO_IFD_POINTER)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_LATITUDE) != NULL) 			$this->EXIF['GPS_LATITUDE'] = $gps->getEntry(PelTag::GPS_LATITUDE)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_LATITUDE_REF) != NULL) 		$this->EXIF['GPS_LATITUDE_REF'] = $gps->getEntry(PelTag::GPS_LATITUDE_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_LONGITUDE) != NULL) 		$this->EXIF['GPS_LONGITUDE'] = $gps->getEntry(PelTag::GPS_LONGITUDE)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_LONGITUDE_REF) != NULL) 	$this->EXIF['GPS_LONGITUDE_REF'] = $gps->getEntry(PelTag::GPS_LONGITUDE_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_MAP_DATUM) != NULL) 		$this->EXIF['GPS_MAP_DATUM'] = $gps->getEntry(PelTag::GPS_MAP_DATUM)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_MEASURE_MODE) != NULL) 		$this->EXIF['GPS_MEASURE_MODE'] = $gps->getEntry(PelTag::GPS_MEASURE_MODE)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_PROCESSING_METHOD) != NULL) $this->EXIF['GPS_PROCESSING_METHOD'] = $exif->getEntry(PelTag::GPS_PROCESSING_METHOD)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_SATELLITES) != NULL) 		$this->EXIF['GPS_SATELLITES'] = $gps->getEntry(PelTag::GPS_SATELLITES)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_SPEED) != NULL) 			$this->EXIF['GPS_SPEED'] = $gps->getEntry(PelTag::GPS_SPEED)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_SPEED_REF) != NULL) 		$this->EXIF['GPS_SPEED_REF'] = $gps->getEntry(PelTag::GPS_SPEED_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_STATUS) != NULL) 			$this->EXIF['GPS_STATUS'] = $gps->getEntry(PelTag::GPS_STATUS)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_TIME_STAMP) != NULL) 		$this->EXIF['GPS_TIME_STAMP'] = $gps->getEntry(PelTag::GPS_TIME_STAMP)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_TRACK) != NULL) 			$this->EXIF['GPS_TRACK'] = $gps->getEntry(PelTag::GPS_TRACK)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_TRACK_REF) != NULL) 		$this->EXIF['GPS_TRACK_REF'] = $gps->getEntry(PelTag::GPS_TRACK_REF)->getText();
+			if($gps!=NULL && $gps->getEntry(PelTag::GPS_VERSION_ID) != NULL) 		$this->EXIF['GPS_VERSION_ID'] = $gps->getEntry(PelTag::GPS_VERSION_ID)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::IMAGE_DESCRIPTION) != NULL) 			$this->EXIF['IMAGE_DESCRIPTION'] = $exif->getEntry(PelTag::IMAGE_DESCRIPTION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::IMAGE_LENGTH) != NULL) 				$this->EXIF['IMAGE_LENGTH'] = $exif->getEntry(PelTag::IMAGE_LENGTH)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::IMAGE_UNIQUE_ID) != NULL) 			$this->EXIF['IMAGE_UNIQUE_ID'] = $exif->getEntry(PelTag::IMAGE_UNIQUE_ID)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::IMAGE_WIDTH) != NULL) 				$this->EXIF['IMAGE_WIDTH'] = $exif->getEntry(PelTag::IMAGE_WIDTH)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::INTEROPERABILITY_IFD_POINTER) != NULL) $this->EXIF['INTEROPERABILITY_IFD_POINTER'] = $exif->getEntry(PelTag::INTEROPERABILITY_IFD_POINTER)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::INTEROPERABILITY_INDEX) != NULL) 		$this->EXIF['INTEROPERABILITY_INDEX'] = $exif->getEntry(PelTag::INTEROPERABILITY_INDEX)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::INTEROPERABILITY_VERSION) != NULL)	$this->EXIF['INTEROPERABILITY_VERSION'] = $exif->getEntry(PelTag::INTEROPERABILITY_VERSION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::INTER_COLOR_PROFILE) != NULL) 		$this->EXIF['INTER_COLOR_PROFILE'] = $exif->getEntry(PelTag::INTER_COLOR_PROFILE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::IPTC_NAA) != NULL) 					$this->EXIF['IPTC_NAA'] = $exif->getEntry(PelTag::IPTC_NAA)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::ISO_SPEED_RATINGS) != NULL) 			$this->EXIF['ISO_SPEED_RATINGS'] = $exif->getEntry(PelTag::ISO_SPEED_RATINGS)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT) != NULL) 	$this->EXIF['JPEG_INTERCHANGE_FORMAT'] = $exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT_LENGTH) != NULL) $this->EXIF['JPEG_INTERCHANGE_FORMAT_LENGTH'] = $exif->getEntry(PelTag::JPEG_INTERCHANGE_FORMAT_LENGTH)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::JPEG_PROC) != NULL) 					$this->EXIF['JPEG_PROC'] = $exif->getEntry(PelTag::JPEG_PROC)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::LIGHT_SOURCE) != NULL) 				$this->EXIF['LIGHT_SOURCE'] = $exif->getEntry(PelTag::LIGHT_SOURCE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::MAKE) != NULL)						$this->EXIF['MAKE'] = $exif->getEntry(PelTag::MAKE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::MAKER_NOTE) != NULL) 					$this->EXIF['MAKER_NOTE'] = $exif->getEntry(PelTag::MAKER_NOTE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::MAX_APERTURE_VALUE) != NULL) 			$this->EXIF['MAX_APERTURE_VALUE'] = $exif->getEntry(PelTag::MAX_APERTURE_VALUE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::METERING_MODE) != NULL) 				$this->EXIF['METERING_MODE'] = $exif->getEntry(PelTag::METERING_MODE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::MODEL) != NULL) 						$this->EXIF['MODEL'] = $exif->getEntry(PelTag::MODEL)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::OECF) != NULL) 						$this->EXIF['OECF'] = $exif->getEntry(PelTag::OECF)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::ORIENTATION) != NULL) 				$this->EXIF['ORIENTATION'] = $exif->getEntry(PelTag::ORIENTATION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::PHOTOMETRIC_INTERPRETATION) != NULL) 	$this->EXIF['PHOTOMETRIC_INTERPRETATION'] = $exif->getEntry(PelTag::PHOTOMETRIC_INTERPRETATION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::PIXEL_X_DIMENSION) != NULL) 			$this->EXIF['PIXEL_X_DIMENSION'] = $exif->getEntry(PelTag::PIXEL_X_DIMENSION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::PIXEL_Y_DIMENSION) != NULL) 			$this->EXIF['PIXEL_Y_DIMENSION'] = $exif->getEntry(PelTag::PIXEL_Y_DIMENSION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::PLANAR_CONFIGURATION) != NULL) 		$this->EXIF['PLANAR_CONFIGURATION'] = $exif->getEntry(PelTag::PLANAR_CONFIGURATION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::PRIMARY_CHROMATICITIES) != NULL) 		$this->EXIF['PRIMARY_CHROMATICITIES'] = $exif->getEntry(PelTag::PRIMARY_CHROMATICITIES)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::PRINT_IM) != NULL) 					$this->EXIF['PRINT_IM'] = $exif->getEntry(PelTag::PRINT_IM)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::REFERENCE_BLACK_WHITE) != NULL) 		$this->EXIF['REFERENCE_BLACK_WHITE'] = $exif->getEntry(PelTag::REFERENCE_BLACK_WHITE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::RELATED_IMAGE_FILE_FORMAT) != NULL) 	$this->EXIF['RELATED_IMAGE_FILE_FORMAT'] = $exif->getEntry(PelTag::RELATED_IMAGE_FILE_FORMAT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::RELATED_IMAGE_LENGTH) != NULL) 		$this->EXIF['RELATED_IMAGE_LENGTH'] = $exif->getEntry(PelTag::RELATED_IMAGE_LENGTH)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::RELATED_IMAGE_WIDTH) != NULL) 		$this->EXIF['RELATED_IMAGE_WIDTH'] = $exif->getEntry(PelTag::RELATED_IMAGE_WIDTH)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::RELATED_SOUND_FILE) != NULL) 			$this->EXIF['RELATED_SOUND_FILE'] = $exif->getEntry(PelTag::RELATED_SOUND_FILE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::RESOLUTION_UNIT) != NULL) 			$this->EXIF['RESOLUTION_UNIT'] = $exif->getEntry(PelTag::RESOLUTION_UNIT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::ROWS_PER_STRIP) != NULL) 				$this->EXIF['ROWS_PER_STRIP'] = $exif->getEntry(PelTag::ROWS_PER_STRIP)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SAMPLES_PER_PIXEL) != NULL) 			$this->EXIF['SAMPLES_PER_PIXEL'] = $exif->getEntry(PelTag::SAMPLES_PER_PIXEL)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SATURATION) != NULL) 					$this->EXIF['SATURATION'] = $exif->getEntry(PelTag::SATURATION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SCENE_CAPTURE_TYPE) != NULL) 			$this->EXIF['SCENE_CAPTURE_TYPE'] = $exif->getEntry(PelTag::SCENE_CAPTURE_TYPE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SCENE_TYPE) != NULL) 					$this->EXIF['SCENE_TYPE'] = $exif->getEntry(PelTag::SCENE_TYPE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SENSING_METHOD) != NULL) 				$this->EXIF['SENSING_METHOD'] = $exif->getEntry(PelTag::SENSING_METHOD)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SHARPNESS) != NULL) 					$this->EXIF['SHARPNESS'] = $exif->getEntry(PelTag::SHARPNESS)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SHUTTER_SPEED_VALUE) != NULL) 		$this->EXIF['SHUTTER_SPEED_VALUE'] = $exif->getEntry(PelTag::SHUTTER_SPEED_VALUE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SOFTWARE) != NULL) 					$this->EXIF['SOFTWARE'] = $exif->getEntry(PelTag::SOFTWARE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SPATIAL_FREQUENCY_RESPONSE) != NULL) 	$this->EXIF['SPATIAL_FREQUENCY_RESPONSE'] = $exif->getEntry(PelTag::SPATIAL_FREQUENCY_RESPONSE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SPECTRAL_SENSITIVITY) != NULL) 		$this->EXIF['SPECTRAL_SENSITIVITY'] = $exif->getEntry(PelTag::SPECTRAL_SENSITIVITY)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::STRIP_BYTE_COUNTS) != NULL) 			$this->EXIF['STRIP_BYTE_COUNTS'] = $exif->getEntry(PelTag::STRIP_BYTE_COUNTS)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::STRIP_OFFSETS) != NULL) 				$this->EXIF['STRIP_OFFSETS'] = $exif->getEntry(PelTag::STRIP_OFFSETS)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SUBJECT_AREA) != NULL) 				$this->EXIF['SUBJECT_AREA'] = $exif->getEntry(PelTag::SUBJECT_AREA)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SUBJECT_DISTANCE) != NULL) 			$this->EXIF['SUBJECT_DISTANCE'] = $exif->getEntry(PelTag::SUBJECT_DISTANCE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SUBJECT_DISTANCE_RANGE) != NULL) 		$this->EXIF['SUBJECT_DISTANCE_RANGE'] = $exif->getEntry(PelTag::SUBJECT_DISTANCE_RANGE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SUBJECT_LOCATION) != NULL) 			$this->EXIF['SUBJECT_LOCATION'] = $exif->getEntry(PelTag::SUBJECT_LOCATION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SUB_SEC_TIME) != NULL) 				$this->EXIF['SUB_SEC_TIME'] = $exif->getEntry(PelTag::SUB_SEC_TIME)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SUB_SEC_TIME_DIGITIZED) != NULL) 		$this->EXIF['SUB_SEC_TIME_DIGITIZED'] = $exif->getEntry(PelTag::SUB_SEC_TIME_DIGITIZED)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::SUB_SEC_TIME_ORIGINAL) != NULL) 		$this->EXIF['SUB_SEC_TIME_ORIGINAL'] = $exif->getEntry(PelTag::SUB_SEC_TIME_ORIGINAL)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::TRANSFER_FUNCTION) != NULL) 			$this->EXIF['TRANSFER_FUNCTION'] = $exif->getEntry(PelTag::TRANSFER_FUNCTION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::TRANSFER_RANGE) != NULL) 				$this->EXIF['TRANSFER_RANGE'] = $exif->getEntry(PelTag::TRANSFER_RANGE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::USER_COMMENT) != NULL) 				$this->EXIF['USER_COMMENT'] = $exif->getEntry(PelTag::USER_COMMENT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::WHITE_BALANCE) != NULL) 				$this->EXIF['WHITE_BALANCE'] = $exif->getEntry(PelTag::WHITE_BALANCE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::WHITE_POINT) != NULL) 				$this->EXIF['WHITE_POINT'] = $exif->getEntry(PelTag::WHITE_POINT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::XP_AUTHOR) != NULL) 					$this->EXIF['XP_AUTHOR'] = $exif->getEntry(PelTag::XP_AUTHOR)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::XP_COMMENT) != NULL) 					$this->EXIF['XP_COMMENT'] = $exif->getEntry(PelTag::XP_COMMENT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::XP_KEYWORDS) != NULL) 				$this->EXIF['XP_KEYWORDS'] = $exif->getEntry(PelTag::XP_KEYWORDS)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::XP_SUBJECT) != NULL) 					$this->EXIF['XP_SUBJECT'] = $exif->getEntry(PelTag::XP_SUBJECT)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::XP_TITLE) != NULL) 					$this->EXIF['XP_TITLE'] = $exif->getEntry(PelTag::XP_TITLE)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::X_RESOLUTION) != NULL) 				$this->EXIF['X_RESOLUTION'] = $exif->getEntry(PelTag::X_RESOLUTION)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::YCBCR_COEFFICIENTS) != NULL)		 	$this->EXIF['YCBCR_COEFFICIENTS'] = $exif->getEntry(PelTag::YCBCR_COEFFICIENTS)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::YCBCR_POSITIONING) != NULL) 			$this->EXIF['YCBCR_POSITIONING'] = $exif->getEntry(PelTag::YCBCR_POSITIONING)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::YCBCR_SUB_SAMPLING) != NULL) 			$this->EXIF['YCBCR_SUB_SAMPLING'] = $exif->getEntry(PelTag::YCBCR_SUB_SAMPLING)->getText();
+			if($exif!=NULL && $exif->getEntry(PelTag::Y_RESOLUTION) != NULL) 				$this->EXIF['Y_RESOLUTION'] = $exif->getEntry(PelTag::Y_RESOLUTION)->getText();
 
 			//////////////////////////////////////////////
 			// 	SOME MODIFICATIONS TO PERSONAL FLAVOR	//
@@ -587,10 +584,28 @@ class WpExZo {
 			$this->EXIF['DATE_TIME_DIGITIZED'] = $exif2['SubIFD']['DateTimeDigitized'];	### HENCE WE SWITCHED TO EXIFER FOR DATE&TIME TAGS ...
 			$this->EXIF['DATE_TIME_ORIGINAL'] = $exif2['SubIFD']['DateTimeOriginal'];
 			$this->EXIF['DATETIME']	= preg_replace('#(.*?)-(.*?)-(.*?)T(.*)\+(.*)#','$3.$2.$1&nbsp;$4+$5',$this->EXIF['DateTimeOriginal']);
+
 			$this->EXIF['CAM'] 		= str_replace('NIKON','',$this->EXIF['MODEL']);
+			$this->EXIF['CAM'] 		= str_replace('<','',$this->EXIF['CAM']);
+			$this->EXIF['CAM'] 		= str_replace('>','',$this->EXIF['CAM']);
 			$this->EXIF['MAKE'] 	= str_replace(' CORPORATION','',$this->EXIF['MAKE']);
 			$this->EXIF['SHUTTER']	= str_replace(' sec.','&nbsp;s',$this->EXIF['EXPOSURE_TIME']);
 			$this->EXIF['FOCAL'] 	= str_replace('.0 mm','&nbsp;mm',$this->EXIF['FOCAL_LENGTH']);
+
+			list($this->EXIF['GPS_LATITUDE_DEG'],$this->EXIF['GPS_LATITUDE_MIN'],$this->EXIF['GPS_LATITUDE_SEC'],$this->EXIF['GPS_LATITUDE_SHORT'])=split(" ",$this->EXIF['GPS_LATITUDE']);
+			$this->EXIF['GPS_LATITUDE_LONG']=substr($this->EXIF['GPS_LATITUDE_DEG'], 0, -1)."&deg; ".substr($this->EXIF['GPS_LATITUDE_MIN'], 0, -1)."&#39; ".substr($this->EXIF['GPS_LATITUDE_SEC'], 0, -1).'&quot;';
+			$this->EXIF['GPS_LATITUDE_DE']=($this->EXIF['GPS_LATITUDE_SEC']/60 + substr($this->EXIF['GPS_LATITUDE_MIN'], 0, -1))/60+substr($this->EXIF['GPS_LATITUDE_DEG'], 0, -1);			
+			list($this->EXIF['GPS_LONGITUDE_DEG'],$this->EXIF['GPS_LONGITUDE_MIN'],$this->EXIF['GPS_LONGITUDE_SEC'],$this->EXIF['GPS_LONGITUDE_SHORT'])=split(" ",$this->EXIF['GPS_LONGITUDE']);
+			$this->EXIF['GPS_LONGITUDE_LONG']=substr($this->EXIF['GPS_LONGITUDE_DEG'], 0, -1)."&deg; ".substr($this->EXIF['GPS_LONGITUDE_MIN'], 0, -1)."&#39; ".substr($this->EXIF['GPS_LONGITUDE_SEC'], 0, -1).'&quot;';
+			$this->EXIF['GPS_LONGITUDE_DE']=($this->EXIF['GPS_LONGITUDE_SEC']/60 + substr($this->EXIF['GPS_LONGITUDE_MIN'], 0, -1))/60+substr($this->EXIF['GPS_LONGITUDE_DEG'], 0, -1);
+
+			list($this->EXIF['GPS_ALTITUDE'])=split("/",$this->EXIF['GPS_ALTITUDE']);
+			
+			if($this->EXIF['GPS_LATITUDE']!=NULL &&  $this->EXIF['GPS_LONGITUDE']!=NULL)	{
+				$this->EXIF['GPS_COMBINED']='<a href="http://maps.google.com/maps?q='.$this->EXIF['GPS_LATITUDE_DE'].','.$this->EXIF['GPS_LONGITUDE_DE'].'&t=k&hl=en&z=16" target="_new" class="content_dark">'.$this->EXIF['GPS_LATITUDE_LONG']." ".$this->EXIF['GPS_LATITUDE_REF']." - ".$this->EXIF['GPS_LONGITUDE_LONG']." ".$this->EXIF['GPS_LONGITUDE_REF'].' - '.$this->EXIF['GPS_ALTITUDE'].'&nbsp;m.a.s.l.</a>';
+			}
+			else	{$this->EXIF['GPS_COMBINED']="unknown (no GPS data)";}
+			
 			$foo=explode('/',$this->EXIF['X_RESOLUTION']);
 			if(is_numeric($foo[1]) && $foo[1]!=0) {$this->EXIF['X_RESOLUTION']=intval($foo[0])/intval($foo[1]);}
 			$foo=explode('/',$this->EXIF['Y_RESOLUTION']);
@@ -646,9 +661,9 @@ class WpExZo {
 			}
 		}
 
-		if($this->user_use_wordpress_thumbs)	{
+		if($this->user_use_wordpress_thumbs)	{		
 			$img_path_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path);
-			$img_path_html_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path_html);
+			$img_path_html_smal=preg_replace("/(.*)\/.*?jpg/","$1/".$img_wp_thumb,$img_path_html);				
 			if(!file_exists($img_path_smal))	{
 				$img_path_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path);
 				$img_path_html_smal=str_replace('.jpg',$this->user_thumbnail_extension.'.jpg',$img_path_html);
@@ -675,8 +690,6 @@ class WpExZo {
 			}
 		}
 
-
-
 		if($title=='exzo_dummy_title')	{$title='This will be your image title';}
 
 		////////////////////
@@ -692,6 +705,7 @@ class WpExZo {
 		//////////////////
 		// LETS ROCK!!!	//
 		//////////////////
+
 		$this->_fetchExif($name,$extension,$img_path,$img_path_smal);
 		
 		///////////////////////////////////////////////////////
@@ -759,14 +773,14 @@ class WpExZo {
 			$print_exif.="<tr>";
 			if($this->zoom)	{	/* SHOWING THUMBNAIL OF REFERENCED IMAGE */
 		  	   	$print_exif.="<td><div class=\"iemahge\" style=\"background-image:url(".$img_path_html_smal."); width: ".$this->imgWidth."px; height: ".$this->imgHeight."px\"><div class=\"OpaDiv\">";
-	 			$print_exif.="<a href=\"$img_path_html\" rel=\"zoom\" title=\"$title\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/zoom/lupe2.png\" alt=\"Click to enlarge picture\" /></a>";
+	 			$print_exif.="<a href=\"$img_path_html\" rel=\"zoom\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/zoom/lupe2.png\" alt=\"Click to enlarge picture\" /></a>";
 				if($urll!="")	{
 					$print_exif.="<a href=\"$urll\" title=\"Read full article\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/images/empty.gif\" height=\"18\" width=\"".($this->imgWidth-18)."\" border=\"0\" alt=\"$title\" /></a><br />";
 	  			   	$print_exif.="<a href=\"$urll\" title=\"Read full article\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/images/empty.gif\" height=\"".($this->imgHeight-$spacer-18)."\" width=\"".$this->imgWidth."\" border=\"0\" alt=\"".$title."\" /></a><br />";
 				}
 				else {
-					$print_exif.="<a href=\"$img_path_html\" rel=\"zoom\" title=\"$title\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/images/empty.gif\" height=\"18\" width=\"".($this->imgWidth-18)."\" border=\"0\" alt=\"$title\" /></a><br />";
-	  		   		$print_exif.="<a href=\"$img_path_html\" rel=\"zoom\" title=\"$title\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/images/empty.gif\" height=\"".($this->imgHeight-$spacer-18)."\" width=\"".$this->imgWidth."\" border=\"0\" alt=\"".$title."\" /></a><br />";
+					$print_exif.="<a href=\"$img_path_html\" rel=\"zoom\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/images/empty.gif\" height=\"18\" width=\"".($this->imgWidth-18)."\" border=\"0\" alt=\"$title\" /></a><br />";
+	  		   		$print_exif.="<a href=\"$img_path_html\" rel=\"zoom\" class=\"imagelinks\"><img src=\"".$this->pluginURL."/images/empty.gif\" height=\"".($this->imgHeight-$spacer-18)."\" width=\"".$this->imgWidth."\" border=\"0\" alt=\"".$title."\" /></a><br />";
 				}
 	 		}
 	 		else	{		/* SHOWING REFERENCED IMAGE */
@@ -866,6 +880,7 @@ class WpExZo {
 		$text = preg_replace('#\[exzo.url="(.*?)".title="(.*?)".*?\](.*?)\.(jpg|jpeg)(.*?)\[/exzo\]#sie', '$this->_exzo(\'$3\', \'$4\', \'$1\',\'$2\',\'0\')', $text);
 		$text = preg_replace('#\[zonoex.url="(.*?)".title="(.*?)".*?\](.*?)\.(jpg|jpeg)(.*?)\[/zonoex\]#sie', '$this->_exzo(\'$3\', \'$4\', \'$1\',\'$2\',\'2\')', $text);
 		$text = preg_replace('#\[exif="(.*?)\.(jpg|jpeg)"\]#sie', '$this->_exzo(\'$1\', \'$2\', \'\',\'\',\'1\')', $text);
+		unset($this->EXIF);
 		return $text;
 	}
 	
@@ -1257,4 +1272,3 @@ if (!empty($_POST['exzo_action'])) {
 }
 
 ?>
-
