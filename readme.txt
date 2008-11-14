@@ -43,6 +43,10 @@ Using this simple token in your post: `[exzo url="" title="title"]image.jpg[/exz
 
 As of version v0.b6.5 it's possible to use the token `[exif img="image.jpg]` to display the Exif only.
 
+
+As of version v0.b7.2 it's possible to show the image and suppress the exif output using `[zonoex url="" title=""]image.jpg[/zonoex]`
+
+
 == Templates ==
 As of v0.b6 you can write your own template for the Title and the Exif section. For example the template for my title looks like this:
 `<table width="%tableWidth%" class="exif">
